@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="assets/img/books.svg" type="image/x-icon">
+
+    <link rel="stylesheet" href="assets/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/lib/sweetalert2/sweetalert2.min.css">
+    
+    <link rel="stylesheet" href="assets/css/container.css">
+
+    <script src="assets/js/alerts.js"></script>
+    
+    <title>Biblioteca</title>
+</head>
+<body>
+    <main class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img src="assets/img/books.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                Biblioteca
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="livros.html">Livros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="clientes.html">Clientes</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="funcionarios.html">Funcionarios <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="emprestimos.html">Emprestimos</a>
+                    </li>
+                </ul>
+
+                <a href="#" type="button" class="btn btn-sm btn-outline-danger">Sair</a>
+            </div>
+        </nav>
+
+        <div class="container">
+
+            <nav class="navbar-expand-lg navbar-light bg-light pt-3">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="formulario-funcionario.html" class="btn btn-outline-primary">Cadastrar Funcionario</a>
+                    </li>
+                  </ul>
+                  <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                        Pesquisar
+                    </button>
+                  </form>
+                </div>
+            </nav>
+
+            <div class="row py-5">
+                <table class="table table-hover custom-md-container">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Usuario</th>
+                            <th scope="col">Funcao</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="alterar-funcionario.html">Maria</a></td>
+                            <td>maria@email.com</td>
+                            <td>maria</td>
+                            <td>Admin</td>
+                            <td>Ativo</td>
+                        </tr>
+                        <tr>
+                            <td><a href="alterar-funcionario.html">Maria</a></td>
+                            <td>maria@email.com</td>
+                            <td>maria</td>
+                            <td>Admin</td>
+                            <td>Ativo</td>
+                        </tr>
+                        <tr>
+                            <td><a href="alterar-funcionario.html">Maria</a></td>
+                            <td>maria@email.com</td>
+                            <td>maria</td>
+                            <td>Admin</td>
+                            <td>Ativo</td>
+                        </tr>
+                        <tr>
+                            <td><a href="alterar-funcionario.html">Maria</a></td>
+                            <td>maria@email.com</td>
+                            <td>maria</td>
+                            <td>Admin</td>
+                            <td>Ativo</td>
+                        </tr>
+                        <tr>
+                            <td><a href="alterar-funcionario.html">Maria</a></td>
+                            <td>maria@email.com</td>
+                            <td>maria</td>
+                            <td>Admin</td>
+                            <td>Ativo</td>
+                        </tr>
+                        <tr>
+                            <td><a href="alterar-funcionario.html">Maria</a></td>
+                            <td>maria@email.com</td>
+                            <td>maria</td>
+                            <td>Admin</td>
+                            <td>Ativo</td>
+                        </tr>
+                        <tr>
+                            <td><a href="alterar-funcionario.html">Maria</a></td>
+                            <td>maria@email.com</td>
+                            <td>maria</td>
+                            <td>Admin</td>
+                            <td>Ativo</td>
+                        </tr>
+                        <tr>
+                            <td><a href="alterar-funcionario.html">Maria</a></td>
+                            <td>maria@email.com</td>
+                            <td>maria</td>
+                            <td>Admin</td>
+                            <td>Ativo</td>
+                        </tr>
+                        <tr>
+                            <td><a href="alterar-funcionario.html">Maria</a></td>
+                            <td>maria@email.com</td>
+                            <td>maria</td>
+                            <td>Admin</td>
+                            <td>Ativo</td>
+                        </tr>
+                    </tbody>
+                </table>               
+           </div>
+
+            <nav>
+                <ul class="pagination justify-content-end">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                </ul>
+            </nav>
+
+
+            <p class="text-center mb-5">Desenvolvidor com muito ❤️</p>
+        </div>
+    </main>
+
+    <script src="assets/lib/jquery/jquery-3.6.0.min.js"></script>
+    <script src="assets/lib/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

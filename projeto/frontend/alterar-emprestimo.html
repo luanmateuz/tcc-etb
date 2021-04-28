@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="assets/img/books.svg" type="image/x-icon">
+
+    <link rel="stylesheet" href="assets/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/lib/sweetalert2/sweetalert2.min.css">
+    
+    <link rel="stylesheet" href="assets/css/container.css">
+
+    <script src="assets/js/alerts.js"></script>
+    
+    <title>Biblioteca</title>
+</head>
+<body>
+    <main class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img src="assets/img/books.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                Biblioteca
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="livros.html">Livros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="clientes.html">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="funcionarios.html">Funcionarios</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="emprestimos.html">Emprestimos <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+
+                <a href="#" type="button" class="btn btn-sm btn-outline-danger">Sair</a>
+            </div>
+        </nav>
+
+        <div class="container">
+
+            <nav class="navbar-expand-lg navbar-light bg-light pt-3">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="emprestimos.html" class="btn btn-outline-secondary">Voltar</a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <form class="custom-container mt-3 mb-5">
+                <p class="h2 mb-4 text-left font-weight-bold">📝 Alterar Emprestimo</p>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="cliente">Cliente</label>
+                        <input type="text" class="form-control" name="cliente" id="cliente" value="NONE" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="livro">Livro</label>
+                        <input type="text" class="form-control" name="livro" id="livro" value="NONE" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="dataEntrega">Data Entrega</label>
+                        <input type="date" class="form-control" name="dataEntrega" id="dataEntrega" value="NONE" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="dataDevolucao">Data Devolução</label>
+                        <input type="date" class="form-control" name="dataDevolucao" id="dataDevolucao" value="NONE" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="status">Status</label>
+                        <select name="status" id="status" class="custom-select" value="NONE" required>
+                            <option value="disponivel">Disponivel</option>
+                            <option value="emprestado" selected>Emprestado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <p class="h2 mt-5 mb-4 text-left font-weight-bold">👮🏻 Multar</p>
+                <div class="form-group">
+                    <label for="motivo">Motivo</label>
+                    <input type="motivo" class="form-control" name="motivo" id="motivo">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="valor">Valor R$</label>
+                        <input type="text" class="form-control" name="valor" id="valor">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="multaPaga">Multa Paga</label>
+                        <select name="multaPaga" id="multaPaga" class="custom-select">
+                            <option value="" selected></option>
+                            <option value="sim">Sim</option>
+                            <option value="nao">Não</option>
+                        </select>
+                    </div>
+                </div>
+
+                <input class="btn btn-outline-success float-right" type="submit" value="Finalizar" onclick="toast()">
+                <input class="btn btn-outline-warning float-right mr-3" type="submit" value="Salvar">
+            </form>
+
+            <p class="text-center mt-3 mb-5">Desenvolvidor com muito ❤️</p>
+        </div>
+    </main>
+
+    <script src="assets/js/cep.js"></script>
+    <script src="assets/js/cpf.js"></script>
+    <script src="assets/js/telefone.js"></script>
+    <script src="assets/lib/jquery/jquery-3.6.0.min.js"></script>
+    <script src="assets/lib/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

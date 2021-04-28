@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="assets/img/books.svg" type="image/x-icon">
+
+    <link rel="stylesheet" href="assets/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/lib/sweetalert2/sweetalert2.min.css">
+    
+    <link rel="stylesheet" href="assets/css/container.css">
+
+    <script src="assets/js/alerts.js"></script>
+
+    <title>Biblioteca</title>
+</head>
+<body>
+    <main class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img src="assets/img/books.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                Biblioteca
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="livros.html">Livros <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="clientes.html">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="funcionarios.html">Funcionarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="emprestimos.html">Emprestimos</a>
+                    </li>
+                </ul>
+
+                <a href="#" type="button" class="btn btn-sm btn-outline-danger">Sair</a>
+            </div>
+        </nav>
+
+        <div class="container">
+
+            <nav class="navbar-expand-lg navbar-light bg-light pt-3">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="livros.html" class="btn btn-outline-secondary">Voltar</a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="custom-md-container mt-4 mb-5">
+                <div class="row">
+                  <div class="col-lg-5">
+                    <img  src="assets/img/book-template.png" class="zoom img-fluid"  alt="">
+                  </div>
+                  <div class="col">
+                    <p class="h2 text-left font-weight-bold">📘 Book Template</p>
+                    <p class="autor ml-5 text-muted"><span class="mr-4 badge badge-primary">Informática</span>Luan Mateus</p>
+                    <p class="descricao ml-5 mb-5 text-justify">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet iste quos inventore. Quia reiciendis aspernatur culpa similique, esse laborum iure molestiae distinctio totam dignissimos earum laboriosam officia est consequatur consequuntur illum neque consectetur! Ipsum, iusto?</p>
+                    <div class="row">
+                        <div class="col ml-5">
+                            <p class="paginas">Paginas: 365</p>
+                        </div>
+                        <div class="col">
+                            <p class="editora">Editora: ETB</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col ml-5">
+                            <p class="ano">Ano: 2021</p>
+                        </div>
+                        <div class="col">
+                            <p class="isbn">ISBN: 1234567890</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col ml-5">
+                            <p class="idioma">Idioma: Portugues</p>
+                        </div>
+                        <div class="col">
+                            <p class="status">Disponivel: Sim</p>
+                        </div>
+                    </div>
+                    
+                    <div class="opcoes mt-3">
+                        <a href="alterar-livro.html" class="btn btn-outline-primary float-right">Alterar</a>
+                        <a href="#" class="btn btn-outline-danger float-right mr-3" onclick="swalWithBootstrap('Book Template')">Excluir</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <p class="text-center mt-3 mb-5">Desenvolvidor com muito ❤️</p>
+        </div>
+    </main>
+
+    <script src="assets/lib/jquery/jquery-3.6.0.min.js"></script>
+    <script src="assets/lib/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

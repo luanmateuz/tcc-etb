@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="assets/img/books.svg" type="image/x-icon">
+
+    <link rel="stylesheet" href="assets/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/lib/sweetalert2/sweetalert2.min.css">
+    
+    <link rel="stylesheet" href="assets/css/container.css">
+
+    <script src="assets/js/alerts.js"></script>
+    
+    <title>Biblioteca</title>
+</head>
+<body>
+    <main class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img src="assets/img/books.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                Biblioteca
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="livros.html">Livros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="clientes.html">Clientes</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="funcionarios.html">Funcionarios <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="emprestimos.html">Emprestimos</a>
+                    </li>
+                </ul>
+
+                <a href="#" type="button" class="btn btn-sm btn-outline-danger">Sair</a>
+            </div>
+        </nav>
+
+        <div class="container">
+
+            <nav class="navbar-expand-lg navbar-light bg-light pt-3">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="funcionarios.html" class="btn btn-outline-secondary">Voltar</a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <form class="custom-container mt-3 mb-5">
+                <p class="h2 mb-4 text-left font-weight-bold">👨🏻‍💻 Alterar Funcionario</p>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="nome">Nome</label>
+                        <input type="text" class="form-control" name="nome" id="nome" value="NONE" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="sobrenome">Sobrenome</label>
+                        <input type="text" class="form-control" name="sobrenome" id="sobrenome" value="NONE" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="dataNascimento">Data Nascimento</label>
+                        <input type="date" class="form-control" name="dataNascimento" id="dataNascimento" value="NONE" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="sexo">Sexo</label>
+                        <select name="sexo" id="sexo" class="custom-select" value="NONE" required>
+                            <option value="m" selected>Masculino</option>
+                            <option value="f">Feminino</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="cpf">CPF</label>
+                        <input type="text" class="form-control" name="cpf" id="cpf" maxlength="14" onkeydown="javascript: fMasc( this, mCPF );" value="NONE" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="rg">RG</label>
+                        <input type="text" class="form-control" name="rg" id="rg" value="NONE" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="funcao">Função</label>
+                        <select name="funcao" id="funcao" class="custom-select" value="NONE" required>
+                            <option value="admin">Administrador</option>
+                            <option value="funcionario">Funcionario</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="usuario">Usuario</label>
+                    <input type="usuario" class="form-control" name="usuario" id="usuario" value="NONE" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="senha">Senha</label>
+                        <input type="password" class="form-control" name="senha" id="senha" value="NONE" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="confirmarSenha">Confirmar Senha</label>
+                        <input type="password" class="form-control" name="confirmarSenha" id="confirmarSenha" value="NONE" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" name="email" id="email" value="NONE" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input type="telefone" class="form-control" name="telefone" id="telefone" maxlength="9" size="9" onblur="mascaraDeTelefone(this)" onfocus="tiraHifen(this)" value="NONE" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="isbn">CEP</label>
+                        <input type="text" class="form-control" name="cep" id="cep" maxlength="8"
+        onblur="pesquisacep(this.value)"; value="NONE" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="rua">Rua</label>
+                        <input type="text" class="form-control" name="rua" id="rua" size="60" value="NONE" required>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="numero">Numero</label>
+                        <input type="number" class="form-control" name="numero" id="numero" size="60" value="NONE" required>
+                    </div><div class="form-group col-md-1">
+                        <label for="numero">UF</label>
+                        <input type="text" class="form-control" name="uf" id="uf" size="2" value="NONE" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="bairro">Bairro</label>
+                        <input type="text" class="form-control" id="bairro" value="NONE" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="cidade">Cidade</label>
+                        <input type="text" class="form-control" id="cidade" value="NONE" required>
+                    </div>
+                    <div class="form-group col">
+                        <label for="complemento">Complemento</label>
+                        <input type="complemento" class="form-control" id="complemento">
+                    </div>
+                </div>
+
+                <input class="btn btn-outline-success float-right" type="submit" value="Salvar" onclick="toast()">
+                <a href="#" class="btn btn-outline-danger float-right mr-3" onclick="swalWithBootstrap('funcionario')">Excluir</a>
+            </form>
+
+            <p class="text-center mt-3 mb-5">Desenvolvidor com muito ❤️</p>
+        </div>
+    </main>
+
+    <script src="assets/js/cep.js"></script>
+    <script src="assets/js/cpf.js"></script>
+    <script src="assets/js/telefone.js"></script>
+    <script src="assets/lib/jquery/jquery-3.6.0.min.js"></script>
+    <script src="assets/lib/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

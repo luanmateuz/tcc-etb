@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="assets/img/books.svg" type="image/x-icon">
+
+    <link rel="stylesheet" href="assets/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/lib/sweetalert2/sweetalert2.min.css">
+    
+    <link rel="stylesheet" href="assets/css/container.css">
+
+    <script src="assets/js/alerts.js"></script>
+    
+    <title>Biblioteca</title>
+</head>
+<body>
+    <main class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img src="assets/img/books.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                Biblioteca
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="livros.html">Livros <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="clientes.html">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="funcionarios.html">Funcionarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="emprestimos.html">Emprestimos</a>
+                    </li>
+                </ul>
+
+                <a href="#" type="button" class="btn btn-sm btn-outline-danger">Sair</a>
+            </div>
+        </nav>
+
+        <div class="container">
+
+            <nav class="navbar-expand-lg navbar-light bg-light pt-3">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="exibir-livro.html" class="btn btn-outline-secondary">Voltar</a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <form class="custom-container mt-3 mb-5">
+                <p class="h2 mb-4 text-left font-weight-bold">📙 Alterar Livro</p>
+                <div class="form-group">
+                    <label for="titulo">Titulo</label>
+                    <input type="text" class="form-control" id="titulo" value="Book Template" required>
+                </div>
+                <div class="mb-3">
+                    <label for="descricao">Descrição</label>
+                    <textarea class="form-control" id="descricao" required>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet iste quos inventore. Quia reiciendis aspernatur culpa similique, esse laborum iure molestiae distinctio totam dignissimos earum laboriosam officia est consequatur consequuntur illum neque consectetur! Ipsum, iusto?</textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="autor">Autor</label>
+                        <input type="text" class="form-control" id="autor" value="Luan Mateus" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="editora">Editora</label>
+                        <input type="text" class="form-control" id="editora" value="ETB">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="categoria">Categoria</label>
+                        <select name="categoria" id="categoria" class="custom-select" required>
+                            <option value="Administração">Administração</option>
+                            <option value="Agricultura">Agricultura</option>
+                            <option value="Antropologia">Antropologia</option>
+                            <option value="Arqueologia">Arqueologia</option>
+                            <option value="Arquitetura">Arquitetura</option>
+                            <option value="Artes">Artes</option>
+                            <option value="Artesanato">Artesanato</option>
+                            <option value="Auto ajuda">Auto ajuda</option>
+                            <option value="Astronomia">Astronomia</option>
+                            <option value="Biografias">Biografias</option>
+                            <option value="Biologia">Biologia</option>
+                            <option value="Botânica">Botânica</option>
+                            <option value="Brasil">Brasil</option>
+                            <option value="Ciência Política">Ciência Política</option>
+                            <option value="Ciências Exatas">Ciências Exatas</option>
+                            <option value="Coleções">Coleções</option>
+                            <option value="Comportamento">Comportamento</option>
+                            <option value="Contos">Contos</option>
+                            <option value="Crítica Literária">Crítica Literária</option>
+                            <option value="Cinema">Cinema</option>
+                            <option value="Comunicação">Comunicação</option>
+                            <option value="Contabilidade">Contabilidade</option>
+                            <option value="Culinária">Culinária</option>
+                            <option value="Decoração">Decoração</option>
+                            <option value="Dicionários">Dicionários</option>
+                            <option value="Didáticos">Didáticos</option>
+                            <option value="Direito">Direito</option>
+                            <option value="Documentos">Documentos</option>
+                            <option value="Ecologia">Ecologia</option>
+                            <option value="Economia">Economia</option>
+                            <option value="Engenharia">Engenharia</option>
+                            <option value="Enciclopédias">Enciclopédias</option>
+                            <option value="Ensino de Idiomas">Ensino de Idiomas</option>
+                            <option value="Esoterismo">Esoterismo</option>
+                            <option value="Esportes">Esportes</option>
+                            <option value="Filosofia">Filosofia</option>
+                            <option value="Ficção Científica">Ficção Científica</option>
+                            <option value="Folclore">Folclore</option>
+                            <option value="Fotografia">Fotografia</option>
+                            <option value="Genealogia">Genealogia</option>
+                            <option value="Geografia">Geografia</option>
+                            <option value="Guerra">Guerra</option>
+                            <option value="História do Brasil">História do Brasil</option>
+                            <option value="História Geral">História Geral</option>
+                            <option value="Hobbies">Hobbies</option>
+                            <option value="Humor">Humor</option>
+                            <option value="Infantojuvenis">Infantojuvenis</option>
+                            <option value="Informática">Informática</option>
+                            <option value="Jogos">Jogos</option>
+                            <option value="Jornais">Jornais</option>
+                            <option value="Linguística">Linguística</option>
+                            <option value="Literatura Brasileira">Literatura Brasileira</option>
+                            <option value="Literatura Estrangeira">Literatura Estrangeira</option>
+                            <option value="Livros Raros">Livros Raros</option>
+                            <option value="Manuscritos">Manuscritos</option>
+                            <option value="Medicina">Medicina</option>
+                            <option value="Moda">Moda</option>
+                            <option value="Música">Música</option>
+                            <option value="Pecuária">Pecuária</option>
+                            <option value="Pedagogia">Pedagogia</option>
+                            <option value="Pintura">Pintura</option>
+                            <option value="Poesia">Poesia</option>
+                            <option value="Psicologia">Psicologia</option>
+                            <option value="Religião">Religião</option>
+                            <option value="Saúde">Saúde</option>
+                            <option value="Sexualidade">Sexualidade</option>
+                            <option value="Sociologia">Sociologia</option>
+                            <option value="Teatro">Teatro</option>
+                            <option value="Turismo">Turismo</option>
+                            <option value="Outros Assuntos">Outros Assuntos</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="paginas">Quantidade de Paginas</label>
+                        <input type="text" class="form-control" id="paginas" value="365" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="ano">Ano de Lançamento</label>
+                        <input type="text" class="form-control" id="ano" value="2021">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="isbn">ISBN</label>
+                        <input type="text" class="form-control" id="isbn" value="1234567890" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="idioma">Idioma</label>
+                        <select name="idioma" id="idioma" class="custom-select" required>
+                            <option value="portugues" selected>Portugues</option>
+                            <option value="ingles">Ingles</option>
+                            <option value="frances">Frances</option>
+                            <option value="japones">Japones</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="status">Disponivel</label>
+                        <select name="status" id="status" class="custom-select" required>
+                            <option value="portugues" selected>Sim</option>
+                            <option value="ingles">Não</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="custom-file my-3 mb-4">
+                    <input type="file" class="custom-file-input" id="imagem">
+                    <label class="custom-file-label" for="imagem">Imagem</label>
+                </div>
+
+
+                <input class="btn btn-outline-success float-right" type="submit" value="Salvar" onclick="toast()">
+            </form>
+
+            <p class="text-center mt-3 mb-5">Desenvolvidor com muito ❤️</p>
+        </div>
+    </main>
+
+    <script src="assets/lib/jquery/jquery-3.6.0.min.js"></script>
+    <script src="assets/lib/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
