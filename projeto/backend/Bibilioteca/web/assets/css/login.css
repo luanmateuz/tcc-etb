@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.row {
+  background-color: white;
+}
+
+.entrar {
+  border: none;
+  outline: none;
+  height: 50px;
+  width: 100%;
+  font-weight: bold;
+  border: 1px solid;
+  border-radius: 4px;
+  transition: 250ms;
+}
+
+.bg-image {
+  min-height: 100vh;
+  background-image: url('../img/pexels-cottonbro-4855325.jpg');
+  background-color: #007bff;
+  background-size: cover;
+  background-position: center;
+}
+
+@media (max-width: 991px) {
+
+  .bg-image {
+    display: none;
+  }
+}
