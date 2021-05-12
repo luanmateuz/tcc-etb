@@ -9,17 +9,15 @@ public class Menu {
     private int idMenu;
     private String nome;
     private String link;
-    private String icone;
     private int exibir;    
 
     public Menu() {
     }
 
-    public Menu(int idMenu, String nome, String link, String icone, int exibir) {
+    public Menu(int idMenu, String nome, String link, int exibir) {
         this.idMenu = idMenu;
         this.nome = nome;
         this.link = link;
-        this.icone = icone;
         this.exibir = exibir;
     }
 
@@ -47,14 +45,6 @@ public class Menu {
         this.link = link;
     }
 
-    public String getIcone() {
-        return icone;
-    }
-
-    public void setIcone(String icone) {
-        this.icone = icone;
-    }
-
     public int getExibir() {
         return exibir;
     }
@@ -66,7 +56,7 @@ public class Menu {
     @Override
     public String toString() {
         return "Menu{" + "idMenu=" + idMenu + ", nome=" + nome + ", link=" 
-                + link + ", icone=" + icone + ", exibir=" + exibir + '}';
+                + link + ", exibir=" + exibir + '}';
     }
     
 }

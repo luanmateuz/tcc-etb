@@ -121,7 +121,6 @@ public class PerfilDAO extends DatabaseDAO {
             menu.setIdMenu(rs.getInt("m.idMenu"));
             menu.setNome(rs.getString("m.nome"));
             menu.setLink(rs.getString("m.link"));
-            menu.setIcone(rs.getString("m.icone"));
             menu.setExibir(rs.getInt("m.exibir"));
 
             lista.add(menu);
@@ -148,7 +147,6 @@ public class PerfilDAO extends DatabaseDAO {
             menu.setIdMenu(rs.getInt("m.idMenu"));
             menu.setNome(rs.getString("m.nome"));
             menu.setLink(rs.getString("m.link"));
-            menu.setIcone(rs.getString("m.icone"));
             menu.setExibir(rs.getInt("m.exibir"));
 
             lista.add(menu);

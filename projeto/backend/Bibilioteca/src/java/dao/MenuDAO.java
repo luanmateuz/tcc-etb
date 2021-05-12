@@ -23,21 +23,20 @@ public class MenuDAO extends DatabaseDAO {
             this.conectar();
 
             if (menu.getIdMenu() == 0) {
-                sql = "INSERT INTO menu (nome, link, icone, exibir) "
-                        + "VALUES (?, ?, ?, ?)";
+                sql = "INSERT INTO menu (nome, link, exibir) "
+                        + "VALUES (?, ?, ?)";
             } else {
-                sql = "UPDATE menu SET nome = ?, link = ?, icone = ?, exibir = ?"
+                sql = "UPDATE menu SET nome = ?, link = ?, exibir = ?"
                         + " WHERE idMenu = ?";
             }
 
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, menu.getNome());
             stmt.setString(2, menu.getLink());
-            stmt.setString(3, menu.getIcone());
-            stmt.setInt(4, menu.getExibir());
+            stmt.setInt(3, menu.getExibir());
 
             if (menu.getIdMenu() > 0) {
-                stmt.setInt(5, menu.getIdMenu());
+                stmt.setInt(4, menu.getIdMenu());
             }
 
             stmt.execute();
@@ -64,7 +63,6 @@ public class MenuDAO extends DatabaseDAO {
                 menu.setIdMenu(rs.getInt("idMenu"));
                 menu.setNome(rs.getString("nome"));
                 menu.setLink(rs.getString("link"));
-                menu.setIcone(rs.getString("icone"));
                 menu.setExibir(rs.getInt("exibir"));
 
                 lista.add(menu);
@@ -91,7 +89,6 @@ public class MenuDAO extends DatabaseDAO {
                 menu.setIdMenu(id);
                 menu.setNome(rs.getString("nome"));
                 menu.setLink(rs.getString("link"));
-                menu.setIcone(rs.getString("icone"));
                 menu.setExibir(rs.getInt("exibir"));
             }
 

@@ -93,7 +93,6 @@ public class GerenciarMenu extends HttpServlet {
             } else {
                 menu.setNome(nome);
                 menu.setLink(link);
-                menu.setIcone(icone);
                 menu.setExibir(Integer.parseInt(exibir));
 
                 if (dao.gravar(menu)) {
