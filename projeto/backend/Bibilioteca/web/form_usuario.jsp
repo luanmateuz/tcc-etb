@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="customTag" tagdir="/WEB-INF/tags" %>
 
 <%@include file="templates/header.jsp" %>
 
@@ -36,7 +37,7 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="dataNascimento">Data Nascimento</label>
-                        <input type="text" class="form-control" name="dataNascimento" id="dataNascimento" value="<fmt:formatDate value='${usuario.dataNascimento.time}' pattern='dd/MM/yyyy'/>" required>
+                        <customTag:inputDate id="dataNascimento" value="${dataNascimento}" classStyle="form-control"/>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="sexo">Sexo</label>
@@ -129,7 +130,7 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label for="numero">Numero</label>
-                        <input type="number" class="form-control" name="numero" id="numero" size="60" value="${usuario.numero}" required>
+                        <input type="number" class="form-control" name="numero" id="numero" value="${usuario.numero}" required>
                     </div><div class="form-group col-md-1">
                         <label for="numero">UF</label>
                         <input type="text" class="form-control" name="uf" id="uf" size="2" value="${usuario.uf}" required>

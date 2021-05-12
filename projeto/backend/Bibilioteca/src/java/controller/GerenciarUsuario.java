@@ -24,6 +24,7 @@ public class GerenciarUsuario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String acao = request.getParameter("acao");
         String idUsuario = request.getParameter("idUsuario");
@@ -40,6 +41,8 @@ public class GerenciarUsuario extends HttpServlet {
                         RequestDispatcher disp = getServletContext()
                                 .getRequestDispatcher("/form_usuario.jsp");
                         request.setAttribute("usuario", usuario);
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        request.setAttribute("dataNascimento", sdf.format(usuario.getDataNascimento().getTime()));
                         disp.forward(request, response);
                     } else {
                         mensagem = "Usuario nao encontrado";
@@ -74,7 +77,11 @@ public class GerenciarUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        String mensagem = "";
+        String pagina = "location.href='listar_usuario.jsp'";
+        
         String idUsuario = request.getParameter("idUsuario");
         String nome = request.getParameter("nome");
         String sobrenome = request.getParameter("sobrenome");
@@ -88,7 +95,7 @@ public class GerenciarUsuario extends HttpServlet {
             dataNascimentoFormatada.setTime(date);
         } catch (ParseException ex) {
             System.out.println("Exception: " + ex);
-            out.println("Erro de convesção de data");
+            mensagem = "Erro de convesção de data";
         }
 
         String sexo = request.getParameter("sexo");
@@ -109,19 +116,16 @@ public class GerenciarUsuario extends HttpServlet {
         String cidade = request.getParameter("cidade");
         String complemento = request.getParameter("complemento");
 
-        String mensagem = "";
-        String pagina = "location.href='listar_usuario.jsp'";
-
         Usuario usuario = new Usuario();
 
         if (!idUsuario.isEmpty()) {
             usuario.setIdUsuario(Integer.parseInt(idUsuario));
         }
+        
         if (nome.equals("") || login.equals("") || senha.equals("") || status.equals("") || idPerfil.equals("")) {
             mensagem = "Todos os campos devem ser preenchidos!";
         }
-        System.out.println("Senha: " + senha);
-        System.out.println("Confirmar Senha: " + confirmarSenha);
+        
         if (!senha.equals(confirmarSenha)) {
             pagina = "history.back()";
             mensagem = "Por favor, confirme a senha";
