@@ -34,6 +34,7 @@ public class UsuarioDAO extends DatabaseDAO {
             usuario.setLogin(rs.getString("u.login"));
             usuario.setSenha(rs.getString("u.senha"));
             usuario.setStatus(rs.getInt("u.status"));
+            usuario.setEmail(rs.getString("u.email"));
 
             Perfil perfil = new Perfil();
             perfil.setIdPerfil(rs.getInt("u.idPerfil"));
