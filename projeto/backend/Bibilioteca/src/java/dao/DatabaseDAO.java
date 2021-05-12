@@ -10,7 +10,7 @@ import java.sql.SQLException;
  */
 public class DatabaseDAO {
 
-    public final String URL = "jdbc:mysql://localhost/projetojava";
+    public final String URL = "jdbc:mysql://localhost/biblioteca";
     public final String USUARIO = "root";
     public final String SENHA = "";
     public Connection conn;

@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -11,8 +12,8 @@ public class Usuario {
     private int idUsuario;
     private String nome;
     private String sobrenome;
-    private Date dataNascimento;
-    private char sexo;
+    private Calendar dataNascimento;
+    private String sexo;
     private String cpf;
     private String rg;
     private String login;
@@ -33,7 +34,7 @@ public class Usuario {
     }
 
     public Usuario(int idUsuario, String nome, String sobrenome, 
-            Date dataNascimento, char sexo, String cpf, String rg, 
+            Calendar dataNascimento, String sexo, String cpf, String rg, 
             String login, String senha, int status, String email, 
             String telefone, String cep, String rua, int numero, String uf,
             String bairro, String cidade, String complemento, Perfil perfil) {
@@ -91,19 +92,19 @@ public class Usuario {
         this.sobrenome = sobrenome;
     }
 
-    public Date getDataNascimento() {
+    public Calendar getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(Calendar dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
-    public char getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(char sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 

@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -54,22 +55,42 @@ public class UsuarioDAO extends DatabaseDAO {
             this.conectar();
             
             if (usuario.getIdUsuario() == 0) {
-                sql = "INSERT INTO usuario (nome, login, senha, status, "
-                        + "idPerfil) VALUES (?, ?, ?, ?, ?)";
+                sql = "INSERT INTO usuario (nome, sobrenome, dataNascimento, "
+                        + "sexo, cpf, rg, login, senha, status, email, telefone,"
+                        + " cep, rua, numero, uf, bairro, cidade, complemento, "
+                        + "idPerfil) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,"
+                        + " ?, ?, ?, ?, ?, ?, ?)";
             } else {
-                sql = "UPDATE usuario SET nome=?, login=?, senha=?, status=?, "
+                sql = "UPDATE usuario SET nome=?, sobrenome=?, dataNascimento=?, "
+                        + "sexo=?, cpf=?, rg=?, login=?, senha=?, status=?, email=?, telefone=?,"
+                        + " cep=?, rua=?, numero=?, uf=?, bairro=?, cidade=?, complemento=?, "
                         + "idPerfil=? WHERE idUsuario=?";
             }
 
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, usuario.getNome());
-            stmt.setString(2, usuario.getLogin());
-            stmt.setString(3, usuario.getSenha());
-            stmt.setInt(4, usuario.getStatus());
-            stmt.setInt(5, usuario.getPerfil().getIdPerfil());
+            stmt.setString(2, usuario.getSobrenome());
+            stmt.setDate(3, new Date(
+                    usuario.getDataNascimento().getTimeInMillis()));
+            stmt.setString(4, usuario.getSexo());
+            stmt.setString(5, usuario.getCpf());
+            stmt.setString(6, usuario.getRg());
+            stmt.setString(7, usuario.getLogin());
+            stmt.setString(8, usuario.getSenha());
+            stmt.setInt(9, usuario.getStatus());
+            stmt.setString(10, usuario.getEmail());
+            stmt.setString(11, usuario.getTelefone());
+            stmt.setString(12, usuario.getCep());
+            stmt.setString(13, usuario.getRua());
+            stmt.setInt(14, usuario.getNumero());
+            stmt.setString(15, usuario.getUf());
+            stmt.setString(16, usuario.getBairro());
+            stmt.setString(17, usuario.getCidade());
+            stmt.setString(18, usuario.getComplemento());
+            stmt.setInt(19, usuario.getPerfil().getIdPerfil());
 
             if (usuario.getIdUsuario() > 0) {
-                stmt.setInt(6, usuario.getIdUsuario());
+                stmt.setInt(20, usuario.getIdUsuario());
             }
 
             stmt.execute();
