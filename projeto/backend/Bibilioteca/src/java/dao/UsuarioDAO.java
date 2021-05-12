@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import model.Perfil;
 import model.Usuario;
 
@@ -119,13 +120,33 @@ public class UsuarioDAO extends DatabaseDAO {
         if (rs.next()) {
             usuario.setIdUsuario(rs.getInt("u.idUsuario"));
             usuario.setNome(rs.getString("u.nome"));
-            usuario.setLogin(rs.getString("u.login"));
-            usuario.setSenha(rs.getString("u.senha"));
-            usuario.setStatus(rs.getInt("u.status"));
+            usuario.setSobrenome(rs.getString("u.sobrenome"));
+            
+            Calendar dataNasc = Calendar.getInstance();
+            dataNasc.setTime(rs.getDate("u.dataNascimento"));
+            usuario.setDataNascimento(dataNasc);
+            
+            usuario.setSexo(rs.getString("u.sexo"));
+            usuario.setCpf(rs.getString("u.cpf"));
+            usuario.setRg(rs.getString("u.rg"));
+            
             Perfil perfil = new Perfil();
             perfil.setIdPerfil(rs.getInt("u.idPerfil"));
             perfil.setNome(rs.getString("p.nome"));
             usuario.setPerfil(perfil);
+            
+            usuario.setLogin(rs.getString("u.login"));
+            usuario.setSenha(rs.getString("u.senha"));
+            usuario.setStatus(rs.getInt("u.status"));
+            usuario.setEmail(rs.getString("u.email"));
+            usuario.setTelefone(rs.getString("u.telefone"));
+            usuario.setCep(rs.getString("u.cep"));
+            usuario.setRua(rs.getString("u.rua"));
+            usuario.setNumero(rs.getInt("u.numero"));
+            usuario.setUf(rs.getString("u.uf"));
+            usuario.setBairro(rs.getString("u.bairro"));
+            usuario.setCidade(rs.getString("u.cidade"));
+            usuario.setComplemento(rs.getString("complemento"));     
         }
 
         this.desconectar();

@@ -21,7 +21,7 @@
 
     <link rel="stylesheet" href="assets/lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/lib/bootstrap/icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="assets/lib/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="assets/lib/sweetalert2/sweetalert2.min.css">  
 
     <link rel="stylesheet" href="assets/css/container.css">
 

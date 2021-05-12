@@ -57,7 +57,7 @@
                                 </c:if>
                             </td>
                             <td>
-                                <a href="#" class="btn btn-primary">
+                                <a href="gerenciar_usuario.do?acao=alterar&idUsuario=${usuario.idUsuario}" class="btn btn-primary">
                                     <i class="bi-pencil" style="font-size: 16px; color: white;"></i>
                                 </a>
                                 <button class="btn btn-warning">

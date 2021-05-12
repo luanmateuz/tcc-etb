@@ -10,7 +10,7 @@
             <nav class="navbar-expand-lg navbar-light bg-light pt-3">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a href="listar_usuarios.jsp" class="btn btn-outline-secondary">Voltar</a>
+                        <a href="listar_usuario.jsp" class="btn btn-outline-secondary">Voltar</a>
                     </li>
                 </ul>
             </nav>
@@ -67,7 +67,9 @@
                     <div class="form-group col-md-6">
                         <label for="idPerfil">Perfil</label>
                         <select name="idPerfil" id="idPerfil" class="custom-select" required>
-                            <option>Selecione o Perfil</option>
+                            <c:if test="${empty param.acao}">
+                                    <option value="">Selecione o Perfil</option>
+                            </c:if>
                             <jsp:useBean class="dao.PerfilDAO" id="perfil">
                                 <c:forEach var="p" items="${perfil.lista}">
                                     <option value="${p.idPerfil}" 
@@ -86,7 +88,10 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="status" class="control-label">Status</label>
-                            <select class="form-control custom-select" name="status" id="status">
+                        <select class="form-control custom-select" name="status" id="status"
+                                <c:if test="${usuario.nome==ulogado.nome}">
+                                    disabled
+                                </c:if>>
                             <option value="1" 
                                     <c:if test="${usuario.status==1}"> 
                                         selected=""
@@ -107,7 +112,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="confirmarSenha">Confirmar Senha</label>
-                        <input type="password" class="form-control" name="confirmarSenha" id="confirmarSenha" required>
+                        <input type="password" class="form-control" name="confirmarSenha" id="confirmarSenha" value="${usuario.senha}" required>
                     </div>
                 </div>
                 <div class="form-group">
