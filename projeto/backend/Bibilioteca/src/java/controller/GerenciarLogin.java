@@ -59,9 +59,10 @@ public class GerenciarLogin extends HttpServlet {
         try {
             PrintWriter out = response.getWriter();
             response.setContentType("text/html;charset=UTF-8");
-            out.println("<script src='assets/lib/sweetalert2/sweetalert2.all.min.js'></script>");
-            out.println("<script src='assets/js/alerts.js'></script>");
-            out.println("<script>showAlertSimple('error','Erro', '" + mensagem + "')</script>");
+            out.println("<script type='text/javascript'>");
+            out.println("alert('" + mensagem + "')");
+            out.println("history.back()");
+            out.println("</script>");
             out.close();
         } catch (Exception e) {
             e.printStackTrace();
