@@ -12,7 +12,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a href="#" class="btn btn-outline-primary">Cadastrar Cliente</a>
+                        <a href="form_cliente.jsp" class="btn btn-outline-primary">Cadastrar Cliente</a>
                     </li>
                   </ul>
                   <form class="form-inline my-2 my-lg-0">
@@ -58,7 +58,7 @@
                                 </c:if>
                             </td>
                             <td>
-                                <a href="#" class="btn btn-primary">
+                                <a href="gerenciar_cliente.do?acao=alterar&idCliente=${cliente.idCliente}" class="btn btn-primary">
                                     <i class="bi-pencil" style="font-size: 16px; color: white;"></i>
                                 </a>
                                 <button class="btn btn-warning">

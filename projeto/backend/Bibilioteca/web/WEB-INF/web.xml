@@ -23,6 +23,10 @@
         <servlet-name>GerenciarUsuario</servlet-name>
         <servlet-class>controller.GerenciarUsuario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GerenciarCliente</servlet-name>
+        <servlet-class>controller.GerenciarCliente</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GerenciarLogin</servlet-name>
         <url-pattern>/gerenciar_login.do</url-pattern>
@@ -42,6 +46,10 @@
     <servlet-mapping>
         <servlet-name>GerenciarUsuario</servlet-name>
         <url-pattern>/gerenciar_usuario.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GerenciarCliente</servlet-name>
+        <url-pattern>/gerenciar_cliente.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
