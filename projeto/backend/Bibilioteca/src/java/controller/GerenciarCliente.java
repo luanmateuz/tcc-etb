@@ -50,6 +50,20 @@ public class GerenciarCliente extends HttpServlet {
                     mensagem = "Acesso Negado!";
                 }
             }
+            
+            if (acao.equals("deletar")) {
+                if (GerenciarLogin.verificarPermissao(request, response)) {
+                    cliente.setIdCliente(Integer.parseInt(idCliente));
+                    if (dao.deletar(cliente)) {
+                        mensagem = "Cliente deletado com sucesso!";
+                    } else {
+                        mensagem = "Erro ao deletar cliente do banco de dados";
+                    }
+                } else {
+                    mensagem = "Acesso Negado";
+                }
+            }
+            
         } catch (Exception e) {
             out.print(e);
             mensagem = "Erro ao executar";

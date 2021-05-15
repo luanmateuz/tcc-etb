@@ -61,7 +61,7 @@
                                 <a href="gerenciar_cliente.do?acao=alterar&idCliente=${cliente.idCliente}" class="btn btn-primary">
                                     <i class="bi-pencil" style="font-size: 16px; color: white;"></i>
                                 </a>
-                                <button class="btn btn-warning">
+                                <button class="btn btn-warning"  onclick="confirmarExclusao(${cliente.idCliente}, '${cliente.nome}')">
                                     <i class="bi-trash" style="font-size: 16px; color: white;"></i>
                                 </button>
                             </td>
@@ -72,5 +72,13 @@
                 </table>               
            </div>
         </div>
+
+        <script type="text/javascript">
+            function confirmarExclusao(id, nome) {
+                if(confirm("Deseja realmente excluir o cliente " + nome + "?")) {
+                    location.href = "gerenciar_cliente.do?acao=deletar&idCliente=" + id;
+                }
+            } 
+        </script>
 
 <%@include file="templates/footer.jsp" %>

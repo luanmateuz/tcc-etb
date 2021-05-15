@@ -17,7 +17,7 @@ public class ClienteDAO extends DatabaseDAO {
 
     public ClienteDAO() throws ClassNotFoundException {
     }
-    
+
     public ArrayList<Cliente> getLista() throws Exception {
 
         ArrayList<Cliente> lista = new ArrayList<>();
@@ -42,13 +42,13 @@ public class ClienteDAO extends DatabaseDAO {
 
         return lista;
     }
-    
+
     public boolean gravar(Cliente cliente) {
-        
+
         try {
             String sql;
             this.conectar();
-            
+
             if (cliente.getIdCliente() == 0) {
                 sql = "INSERT INTO cliente (nome, sobrenome, dataNascimento, "
                         + "sexo, cpf, status, email, telefone, cep, rua, numero,"
@@ -92,7 +92,24 @@ public class ClienteDAO extends DatabaseDAO {
             return false;
         }
     }
-    
+
+    public boolean deletar(Cliente cliente) {
+        
+        try {
+            this.conectar();
+            String sql = "DELETE FROM cliente WHERE idCliente=?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, cliente.getIdCliente());
+            stmt.execute();
+            this.desconectar();
+
+            return true;
+        } catch (Exception e) {
+            System.out.println("Erro: " + e);
+            return false;
+        }
+    }
+
     public Cliente getCarregaPorId(int id) throws SQLException {
 
         Cliente cliente = new Cliente();
@@ -107,11 +124,11 @@ public class ClienteDAO extends DatabaseDAO {
             cliente.setIdCliente(rs.getInt("idCliente"));
             cliente.setNome(rs.getString("nome"));
             cliente.setSobrenome(rs.getString("sobrenome"));
-            
+
             Calendar dataNasc = Calendar.getInstance();
             dataNasc.setTime(rs.getDate("dataNascimento"));
             cliente.setDataNascimento(dataNasc);
-            
+
             cliente.setSexo(rs.getString("sexo"));
             cliente.setCpf(rs.getString("cpf"));
             cliente.setStatus(rs.getInt("status"));
@@ -123,7 +140,7 @@ public class ClienteDAO extends DatabaseDAO {
             cliente.setUf(rs.getString("uf"));
             cliente.setBairro(rs.getString("bairro"));
             cliente.setCidade(rs.getString("cidade"));
-            cliente.setComplemento(rs.getString("complemento"));     
+            cliente.setComplemento(rs.getString("complemento"));
         }
 
         this.desconectar();
