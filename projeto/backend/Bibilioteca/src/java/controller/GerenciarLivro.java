@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -26,6 +27,7 @@ public class GerenciarLivro extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String acao = request.getParameter("acao");
@@ -50,7 +52,22 @@ public class GerenciarLivro extends HttpServlet {
                 } else {
                     mensagem = "Acesso Negado!";
                 }
-
+            }
+            
+            if (acao.equals("alterar")) {
+                if (GerenciarLogin.verificarPermissao(request, response)) {
+                    livro = dao.getCarregaPorId(Integer.parseInt(idLivro));
+                    if (livro.getIdLivro() > 0) {
+                        RequestDispatcher disp = getServletContext()
+                                .getRequestDispatcher("/form_livro.jsp");
+                        request.setAttribute("livro", livro);
+                        disp.forward(request, response);
+                    } else {
+                        mensagem = "Cliente nao encontrado";
+                    }
+                } else {
+                    mensagem = "Acesso Negado!";
+                }
             }
         } catch (Exception e) {
             out.print(e);
@@ -65,6 +82,7 @@ public class GerenciarLivro extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String mensagem = "";
@@ -81,6 +99,7 @@ public class GerenciarLivro extends HttpServlet {
         String idioma = request.getParameter("idioma");
         String disponivel = request.getParameter("disponivel");
         Part imagem = request.getPart("imagem");
+        String imagemExiste = request.getParameter("imagemExiste");
 
         Livro livro = new Livro();
 
@@ -98,13 +117,15 @@ public class GerenciarLivro extends HttpServlet {
             File file = new File(pastaUpload, nomeImagem);
 
             try (InputStream input = conteudoImagem) {
-                Files.copy(input, file.toPath());
+                Files.copy(input, file.toPath(),  StandardCopyOption.REPLACE_EXISTING);
 
                 livro.setImagem(nomeImagem);
             } catch (IOException ex) {
                 System.out.println("Exception: " + ex);
                 mensagem = "Erro ao fazer upload de imagem";
             }
+        } else {
+            livro.setImagem(imagemExiste);
         }
 
         if (!idLivro.isEmpty()) {

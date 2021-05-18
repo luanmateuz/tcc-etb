@@ -48,12 +48,14 @@
                         <p class="idioma"><span class="font-weight-bold">Idioma:</span> ${livro.idioma}</p>
                     </div>
                     <div class="col">
-                        <p class="status"><span class="font-weight-bold">Disponivel:</span> ${livro.disponivel}</p>
+                        <p class="status"><span class="font-weight-bold">Disponivel:</span> 
+                            <c:if test="${livro.disponivel==1}">Sim</c:if>
+                            <c:if test="${livro.disponivel==2}">Não</c:if></p>
                     </div>
                 </div>
 
                 <div class="opcoes mt-3">
-                    <a href="#" class="btn btn-outline-primary float-right">Alterar</a>
+                    <a href="gerenciar_livro.do?acao=alterar&idLivro=${livro.idLivro}" class="btn btn-outline-primary float-right">Alterar</a>
                     <a href="#" class="btn btn-outline-danger float-right mr-3">Excluir</a>
                 </div>
             </div>
