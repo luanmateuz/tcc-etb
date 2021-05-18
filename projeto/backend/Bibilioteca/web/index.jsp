@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a href="formulario-livro.html" class="btn btn-outline-primary">Cadastrar Livro</a>
+                    <a href="form_livro.jsp" class="btn btn-outline-primary">Cadastrar Livro</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
