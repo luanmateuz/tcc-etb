@@ -69,13 +69,26 @@ public class GerenciarLivro extends HttpServlet {
                     mensagem = "Acesso Negado!";
                 }
             }
+            
+            if (acao.equals("deletar")) {
+                if (GerenciarLogin.verificarPermissao(request, response)) {
+                    int id = Integer.parseInt(idLivro);
+                    if (dao.deletar(id)) {
+                        mensagem = "Livro deletado!";
+                    } else {
+                        mensagem = "Erro ao deletar livro!";
+                    }
+                } else {
+                    mensagem = "Acesso negado!";
+                }
+            }
         } catch (Exception e) {
             out.print(e);
             mensagem = "Erro ao executar";
         }
         out.println("<script type='text/javascript'>");
         out.println("alert('" + mensagem + "')");
-        out.println("location.href='listar_livro.jsp'");
+        out.println("location.href='index.jsp'");
         out.println("</script>");
     }
 

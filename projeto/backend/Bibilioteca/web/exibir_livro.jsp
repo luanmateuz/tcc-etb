@@ -29,10 +29,10 @@
                 <p class="descricao ml-5 mb-5 text-justify">${livro.descricao}</p>
                 <div class="row">
                     <div class="col ml-5">
-                        <p class="paginas"><span class="font-weight-bold">Paginas:</span> ${livro.paginas}</p>
+                        <p class="editora"><span class="font-weight-bold">Editora:</span> ${livro.editora}</p>
                     </div>
                     <div class="col">
-                        <p class="editora"><span class="font-weight-bold">Editora:</span> ${livro.editora}</p>
+                        <p class="paginas"><span class="font-weight-bold">Paginas:</span> ${livro.paginas}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -56,7 +56,7 @@
 
                 <div class="opcoes mt-3">
                     <a href="gerenciar_livro.do?acao=alterar&idLivro=${livro.idLivro}" class="btn btn-outline-primary float-right">Alterar</a>
-                    <a href="#" class="btn btn-outline-danger float-right mr-3">Excluir</a>
+                    <button class="btn btn-outline-danger float-right mr-3" onclick="swalWithBootstrap('${livro.titulo}', 'gerenciar_livro.do?acao=deletar&idLivro=' + ${livro.idLivro})">Excluir</button>
                 </div>
             </div>
         </div>

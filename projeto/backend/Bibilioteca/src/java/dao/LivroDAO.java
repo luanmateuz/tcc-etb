@@ -86,6 +86,22 @@ public class LivroDAO extends DatabaseDAO {
             return false;
         }
     }
+    
+    public boolean deletar(int id) {
+
+        try {
+            String sql = "DELETE FROM livro WHERE idLivro = ?";
+            this.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.execute();
+            this.desconectar();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Exception: " + e);
+            return false;
+        }
+    }
 
     public Livro getCarregaPorId(int id) throws SQLException {
 
