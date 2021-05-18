@@ -3,9 +3,7 @@
 
 <%@include file="templates/header.jsp" %>
 
-<div class="container">
-
-    <nav class="navbar-expand-lg navbar-light bg-light pt-3">
+    <nav class="navbar-expand-lg navbar-light pt-3">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -39,4 +37,4 @@
         </div>
     </jsp:useBean>
 
-    <%@include file="templates/footer.jsp" %>
+<%@include file="templates/footer.jsp" %>

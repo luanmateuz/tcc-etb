@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="templates/header.jsp" %>
 
-            <nav class="navbar-expand-lg navbar-light bg-light pt-3">
+            <nav class="navbar-expand-lg navbar-light pt-3">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         <a href="index.jsp" class="btn btn-outline-secondary">Voltar</a>

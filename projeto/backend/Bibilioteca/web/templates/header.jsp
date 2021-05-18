@@ -29,8 +29,8 @@
 </head>
 
 <body>
-    <main class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <header class="bg-light sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-light container">
             <a class="navbar-brand" href="index.jsp">
                 <img src="assets/img/books.svg" width="30" height="30" class="d-inline-block align-top" alt="">
                 Biblioteca
@@ -57,3 +57,6 @@
                 
             </div>
         </nav>
+    </header>
+        
+    <main class="container">           

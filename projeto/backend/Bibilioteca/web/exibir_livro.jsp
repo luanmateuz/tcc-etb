@@ -3,9 +3,7 @@
 
 <%@include file="templates/header.jsp" %>
 
-<div class="container">
-
-    <nav class="navbar-expand-lg navbar-light bg-light pt-3">
+    <nav class="navbar-expand-lg navbar-light pt-3">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a href="index.jsp" class="btn btn-outline-secondary">Voltar</a>
@@ -62,4 +60,4 @@
         </div>
     </div>
 
-    <%@include file="templates/footer.jsp" %>
+<%@include file="templates/footer.jsp" %>

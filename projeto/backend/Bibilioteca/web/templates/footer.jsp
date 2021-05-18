@@ -1,7 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-        <p class="text-center mt-3 mb-5">Desenvolvidor com muito ❤️</p>
-    </div>
+        <p class="text-center mt-3 mb-5">Desenvolvido com muito ❤️</p>
 </main>
 
 <script src="assets/js/cep.js"></script>
