@@ -6,17 +6,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@include file="templates/header.jsp" %>
-            
-            <nav class="navbar-expand-lg navbar-light pt-3">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a href="form_emprestimo.jsp" class="btn btn-outline-primary">Registrar Emprestimo</a>
-                    </li>
-                  </ul>
-                </div>
-            </nav>
-            
+
             <h2 class="h2 mt-5 text-left font-weight-bold custom-md-container">📋 Lista de Emprestimos</h2>
 
             <div class="row py-5">
@@ -28,7 +18,7 @@
                             <th scope="col">Livro</th>
                             <th scope="col">Funcionario</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Data de devolução</th>
+                            <th scope="col">Devolução</th>
                             <th scope="col">Opções</th>
                         </tr>
                     </thead>
@@ -39,17 +29,17 @@
                         <tr>
                             <td>${emprestimo.idEmprestimo}</td>
                             <td>${emprestimo.cliente.nome}</td>
-                            <td>${emprestimo.livro.titulo}</td>
+                            <td><a href="gerenciar_livro.do?acao=exibir&idLivro=${emprestimo.livro.idLivro}">${emprestimo.livro.titulo}</a></td>
                             <td>${emprestimo.usuario.nome}</td>
                             <td>
                                 <c:if test="${emprestimo.status==1}">
-                                    Disponivel
+                                    <span class="badge badge-primary p-3">Emprestado</span>
                                 </c:if>
                                 <c:if test="${emprestimo.status==2}">
-                                    Emprestado
+                                    <span class="badge badge-danger p-3">Atrasado</span>
                                 </c:if>
                                 <c:if test="${emprestimo.status==3}">
-                                    Finalizado
+                                    <span class="badge badge-success p-3">Finalizado</span>
                                 </c:if>
                             </td>
                             <td><fmt:formatDate pattern="dd/MM/yyyy" value="${emprestimo.dataDevolucao.time}" /></td>

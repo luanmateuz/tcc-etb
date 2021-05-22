@@ -20,7 +20,7 @@ public class LivroDAO extends DatabaseDAO {
 
         try {
             this.conectar();
-            String sql = "SELECT idLivro, titulo, imagem FROM livro";
+            String sql = "SELECT idLivro, titulo, imagem, disponivel FROM livro";
             PreparedStatement pstmt = this.conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
 
@@ -29,6 +29,7 @@ public class LivroDAO extends DatabaseDAO {
                 livro.setIdLivro(rs.getInt("idLivro"));
                 livro.setTitulo(rs.getString("titulo"));
                 livro.setImagem(rs.getString("imagem"));
+                livro.setDisponivel(rs.getInt("disponivel"));
 
                 lista.add(livro);
             }

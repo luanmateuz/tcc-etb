@@ -62,6 +62,9 @@
                                 <button class="btn btn-warning"  onclick="confirmarExclusao(${cliente.idCliente}, '${cliente.nome}')">
                                     <i class="bi-trash" style="font-size: 16px; color: white;"></i>
                                 </button>
+                                <a href="form_emprestimo.jsp?idCliente=${cliente.idCliente}" class="btn btn-success">
+                                    <i class="bi-book" style="font-size: 16px; color: white;"></i>
+                                </a>
                             </td>
                         </tr>
                         </c:forEach>

@@ -1,8 +1,11 @@
 package dao;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import model.Cliente;
@@ -26,7 +29,8 @@ public class EmprestimoDAO extends DatabaseDAO {
         String SQL = "SELECT *, l.*, c.*, u.*  FROM emprestimo e "
                 + "INNER JOIN livro l ON l.idLivro = e.idLivro "
                 + "INNER JOIN cliente c ON c.idCliente = e.idCliente "
-                + "INNER JOIN usuario u ON u.idUsuario = e.idUsuario";
+                + "INNER JOIN usuario u ON u.idUsuario = e.idUsuario "
+                + "ORDER BY e.idEmprestimo DESC";
         this.conectar();
         try (Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(SQL)) {
@@ -66,5 +70,64 @@ public class EmprestimoDAO extends DatabaseDAO {
 
         return lista;
     }
- 
+    
+    public boolean gravar(Emprestimo emprestimo) {
+        
+        try {
+            String sql;
+            this.conectar();
+            
+            if (emprestimo.getIdEmprestimo() == 0) {
+                sql = "INSERT INTO emprestimo (dataEntrega, dataDevolucao, "
+                        + "idCliente, idUsuario, idLivro, multaMotivo, multaValor,"
+                        + " multaPaga, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            } else {
+                sql = "UPDATE emprestimo SET dataEntrega = ?, dataDevolucao = ?, "
+                        + "idCliente = ?, idUsuario = ?, idLivro = ?, multaMotivo = ?, "
+                        + "multaValor = ?, multaPaga = ?, status = ? WHERE idEmprestimo = ?";
+            }
+            
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setDate(1, new Date(emprestimo
+                    .getDataEntrega().getTimeInMillis()));
+            stmt.setDate(2, new Date(emprestimo
+                    .getDataDevolucao().getTimeInMillis()));
+            stmt.setInt(3, emprestimo.getCliente().getIdCliente());
+            stmt.setInt(4, emprestimo.getUsuario().getIdUsuario());
+            stmt.setInt(5, emprestimo.getLivro().getIdLivro());
+            this.disponivel(emprestimo.getLivro().getIdLivro());
+            stmt.setString(6, emprestimo.getMultaMotivo());
+            stmt.setDouble(7, emprestimo.getMultaValor());
+            stmt.setInt(8, emprestimo.getMultaPaga());
+            stmt.setInt(9, emprestimo.getStatus());
+            
+            if (emprestimo.getIdEmprestimo() > 0) {
+                stmt.setInt(10, emprestimo.getIdEmprestimo());
+            }
+            
+            stmt.execute();
+            this.desconectar();
+            
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
+    
+    public boolean disponivel(int id) {
+
+        try {
+            String sql = "UPDATE livro SET disponivel = 2 WHERE idLivro = ? ";
+            this.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.execute();
+            this.desconectar();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Exception: " + e);
+            return false;
+        }
+    }
 }

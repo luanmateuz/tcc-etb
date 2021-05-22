@@ -31,6 +31,10 @@
         <servlet-name>GerenciarLivro</servlet-name>
         <servlet-class>controller.GerenciarLivro</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GerenciarEmprestimo</servlet-name>
+        <servlet-class>controller.GerenciarEmprestimo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GerenciarLogin</servlet-name>
         <url-pattern>/gerenciar_login.do</url-pattern>
@@ -58,6 +62,10 @@
     <servlet-mapping>
         <servlet-name>GerenciarLivro</servlet-name>
         <url-pattern>/gerenciar_livro.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GerenciarEmprestimo</servlet-name>
+        <url-pattern>/gerenciar_emprestimo.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

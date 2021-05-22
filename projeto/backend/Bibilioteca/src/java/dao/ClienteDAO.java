@@ -30,6 +30,7 @@ public class ClienteDAO extends DatabaseDAO {
                 Cliente cliente = new Cliente();
                 cliente.setIdCliente(rs.getInt("idCliente"));
                 cliente.setNome(rs.getString("nome"));
+                cliente.setSobrenome(rs.getString("sobrenome"));
                 cliente.setEmail(rs.getString("email"));
                 cliente.setTelefone(rs.getString("telefone"));
                 cliente.setStatus(rs.getInt("status"));
