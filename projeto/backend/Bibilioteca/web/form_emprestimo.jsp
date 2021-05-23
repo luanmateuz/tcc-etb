@@ -8,7 +8,7 @@
             <nav class="navbar-expand-lg navbar-light pt-3">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a href="listar_cliente.jsp" class="btn btn-outline-secondary">Voltar</a>
+                        <a href="listar_emprestimo.jsp" class="btn btn-outline-secondary">Voltar</a>
                     </li>
                 </ul>
             </nav>
@@ -22,7 +22,7 @@
             </c:if> 
             
             <form action="gerenciar_emprestimo.do" method="post" class="custom-container mt-3 mb-5">
-                <p class="h2 mb-4 text-left font-weight-bold">📝 Registrar Emprestimo</p>
+                <p class="h2 mb-4 text-left font-weight-bold">📝 <%=acao%> Emprestimo</p>
                 <div class="form-row">
                     <input type="hidden" name="idEmprestimo" value="${emprestimo.idEmprestimo}"/>
                     <input type="hidden" name="idUsuario" value="${ulogado.idUsuario}"/>
@@ -36,6 +36,11 @@
                                             ${c.nome} ${c.sobrenome}
                                         </option>
                                     </c:if>
+                                    <c:if test="${not empty emprestimo.cliente}">
+                                        <option value="${emprestimo.cliente.idCliente}">
+                                            ${emprestimo.cliente.nome} ${emprestimo.cliente.sobrenome}
+                                        </option>
+                                    </c:if>
                                 </c:forEach>
                             </jsp:useBean>
                         </select>
@@ -44,6 +49,11 @@
                         <label for="idLivro">Livro</label>
                         <select class="form-control" name="idLivro" id="idLivro" required>
                             <jsp:useBean class="dao.LivroDAO" id="livro">
+                                <c:if test="${not empty emprestimo.livro}">
+                                    <option selected value="${emprestimo.livro.idLivro}">
+                                        ${emprestimo.livro.titulo}
+                                    </option>
+                                </c:if>
                                 <c:forEach var="l" items="${livro.lista}">
                                     <c:if test="${l.disponivel=='1'}">
                                         <option value="${l.idLivro}">
@@ -74,8 +84,7 @@
                 
                 <c:if test="${not empty param.acao}">
                 <div class="form-group">
-                    <label for="usuario">Emprestimo feito por</label>
-                    <input type="text" class="form-control" name="usuario" id="usuario" value="${emprestimo.idUsuario}">
+                    <h5 class="text-right">Emprestimo feito por <span class="font-weight-bold">${emprestimo.usuario.nome}</span></h5>
                 </div>
                 </c:if>
                 

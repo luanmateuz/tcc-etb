@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +26,44 @@ public class GerenciarEmprestimo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        String acao = request.getParameter("acao");
+        String idEmprestimo = request.getParameter("idEmprestimo");
+        String mensagem = "";
 
+        try {
+            Emprestimo emprestimo = new Emprestimo();
+            EmprestimoDAO dao = new EmprestimoDAO();
+
+            if (acao.equals("alterar")) {
+                if (GerenciarLogin.verificarPermissao(request, response)) {
+                    emprestimo = dao.getCarregaPorId(Integer.parseInt(idEmprestimo));
+                    if (emprestimo.getIdEmprestimo() > 0) {
+                        RequestDispatcher disp = getServletContext()
+                                .getRequestDispatcher("/form_emprestimo.jsp");
+                        request.setAttribute("emprestimo", emprestimo);
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        request.setAttribute("dataEntrega", sdf.format(emprestimo.getDataEntrega().getTime()));
+                        request.setAttribute("dataDevolucao", sdf.format(emprestimo.getDataDevolucao().getTime()));
+                        disp.forward(request, response);
+                    } else {
+                        mensagem = "Emprestimo nao encontrado";
+                    }
+                } else {
+                    mensagem = "Acesso Negado!";
+                }
+            }
+
+        } catch (Exception e) {
+            out.print(e);
+            mensagem = "Erro ao executar";
+        }
+        out.println("<script type='text/javascript'>");
+        out.println("alert('" + mensagem + "')");
+        out.println("location.href='index.jsp'");
+        out.println("</script>");
     }
 
     @Override
@@ -73,13 +111,13 @@ public class GerenciarEmprestimo extends HttpServlet {
 
         Cliente cliente = new Cliente();
         cliente.setIdCliente(Integer.parseInt(idCliente));
-        
+
         Livro livro = new Livro();
         livro.setIdLivro(Integer.parseInt(idLivro));
-        
+
         Usuario usuario = new Usuario();
         usuario.setIdUsuario(Integer.parseInt(idUsuario));
-        
+
         emprestimo.setCliente(cliente);
         emprestimo.setLivro(livro);
         emprestimo.setUsuario(usuario);
