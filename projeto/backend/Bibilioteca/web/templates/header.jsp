@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="assets/lib/sweetalert2/sweetalert2.min.css">  
 
     <link rel="stylesheet" href="assets/css/container.css">
+    <link rel="stylesheet" href="assets/css/livro.css">
 
     <title>Biblioteca</title>
 </head>

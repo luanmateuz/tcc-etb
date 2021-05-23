@@ -24,13 +24,13 @@
             <c:forEach var="livro" items="${dao.lista}">
                 <div class="col-lg-2 col-md-4 col-xs-6">
                     <c:if test="${empty livro.imagem}">
-                        <img  src="assets/img/livros/book-template.png" class="zoom img-fluid "  alt="">
+                        <img  src="assets/img/livros/book-template.png" class="zoom img-fluid imagem"  alt="">
                     </c:if>
                     <c:if test="${not empty livro.imagem}">
-                        <img  src="assets/img/livros/${livro.imagem}" class="zoom img-fluid "  alt="">
+                        <img  src="assets/img/livros/${livro.imagem}" class="zoom img-fluid imagem"  alt="">
                     </c:if>
                     <a href="gerenciar_livro.do?acao=exibir&idLivro=${livro.idLivro}" class="text-reset">
-                        <p class="font-weight-bold text-center">${livro.titulo}</p>
+                        <p class="font-weight-bold text-center titulo">${livro.titulo}</p>
                     </a>
                 </div>
             </c:forEach>              

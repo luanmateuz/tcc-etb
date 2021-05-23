@@ -1,0 +1,16 @@
+.imagem {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+}
+
+.titulo {
+  white-space: nowrap; 
+  width: 160px; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+
+.titulo:hover {
+    white-space: normal;
+}
