@@ -14,3 +14,13 @@
 .titulo:hover {
     white-space: normal;
 }
+
+@media (max-width: 1199px) {
+    .imagem {
+        height: 180px;
+    }
+    
+    .titulo {
+        width: 130px;
+    }
+}
