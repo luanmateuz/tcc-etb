@@ -47,9 +47,9 @@
                                 <a href="gerenciar_emprestimo.do?acao=alterar&idEmprestimo=${emprestimo.idEmprestimo}" class="btn btn-primary">
                                     <i class="bi-pencil" style="font-size: 16px; color: white;"></i>
                                 </a>
-                                <button class="btn btn-warning" onclick="swalWithBootstrap('${emprestimo}', 'gerenciar_emprestimo.do?acao=deletar&idEmprestimo=' + ${emprestimo.idEmprestimo})">
+                                <a class="btn btn-danger" href="gerenciar_emprestimo.do?acao=deletar&idEmprestimo=${emprestimo.idEmprestimo}&idLivro=${emprestimo.livro.idLivro}">
                                     <i class="bi-trash" style="font-size: 16px; color: white;"></i>
-                                </button>
+                                </a>
                             </td>
                         </tr>
                         

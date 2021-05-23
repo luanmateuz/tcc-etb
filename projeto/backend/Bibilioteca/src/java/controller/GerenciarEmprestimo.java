@@ -31,6 +31,7 @@ public class GerenciarEmprestimo extends HttpServlet {
         PrintWriter out = response.getWriter();
         String acao = request.getParameter("acao");
         String idEmprestimo = request.getParameter("idEmprestimo");
+        String idLivro = request.getParameter("idLivro");
         String mensagem = "";
 
         try {
@@ -53,6 +54,19 @@ public class GerenciarEmprestimo extends HttpServlet {
                     }
                 } else {
                     mensagem = "Acesso Negado!";
+                }
+            }
+            
+            if (acao.equals("deletar")) {
+                if (GerenciarLogin.verificarPermissao(request, response)) {
+                    emprestimo.setIdEmprestimo(Integer.parseInt(idEmprestimo));
+                    if (dao.deletar(emprestimo, Integer.parseInt(idLivro))) {
+                        mensagem = "Emprestimo deletado com sucesso!";
+                    } else {
+                        mensagem = "Erro ao deletar emprestimo do banco de dados";
+                    }
+                } else {
+                    mensagem = "Acesso Negado";
                 }
             }
 

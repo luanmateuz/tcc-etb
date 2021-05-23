@@ -94,7 +94,7 @@ public class EmprestimoDAO extends DatabaseDAO {
             stmt.setInt(3, emprestimo.getCliente().getIdCliente());
             stmt.setInt(4, emprestimo.getUsuario().getIdUsuario());
             stmt.setInt(5, emprestimo.getLivro().getIdLivro());
-            this.disponivel(emprestimo.getLivro().getIdLivro());
+            this.disponivel(2, emprestimo.getLivro().getIdLivro());
             stmt.setString(6, emprestimo.getMultaMotivo());
             stmt.setDouble(7, emprestimo.getMultaValor());
             stmt.setInt(8, emprestimo.getMultaPaga());
@@ -114,13 +114,14 @@ public class EmprestimoDAO extends DatabaseDAO {
         }
     }
 
-    public boolean disponivel(int id) {
+    public boolean disponivel(int status, int id) {
 
         try {
-            String sql = "UPDATE livro SET disponivel = 2 WHERE idLivro = ? ";
+            String sql = "UPDATE livro SET disponivel = ? WHERE idLivro = ? ";
             this.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, id);
+            stmt.setInt(1, status);
+            stmt.setInt(2, id);
             stmt.execute();
             this.desconectar();
             return true;
@@ -167,17 +168,33 @@ public class EmprestimoDAO extends DatabaseDAO {
             Calendar dataEntregaFormatada = Calendar.getInstance();
             dataEntregaFormatada.setTime(data);
             emprestimo.setDataEntrega(dataEntregaFormatada);
-            
+
             data = rs.getDate("dataDevolucao");
             Calendar dataDevolucaoFormatada = Calendar.getInstance();
             dataDevolucaoFormatada.setTime(data);
             emprestimo.setDataDevolucao(dataDevolucaoFormatada);
-            
 
             emprestimo.setStatus(rs.getInt("e.status"));
         }
 
         this.desconectar();
         return emprestimo;
+    }
+
+    public boolean deletar(Emprestimo emprestimo, int idLivro) {
+        try {
+            String sql = "DELETE FROM emprestimo WHERE idEmprestimo = ?";
+            this.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, emprestimo.getIdEmprestimo());
+            this.disponivel(1, idLivro);
+            stmt.execute();
+            
+            this.desconectar();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Exception: " + e.getMessage());
+            return false;
+        }
     }
 }
