@@ -197,4 +197,18 @@ public class EmprestimoDAO extends DatabaseDAO {
             return false;
         }
     }
+    
+    public boolean finalizar(Emprestimo emprestimo, int idLivro) {
+        try {
+            String sql = "UPDATE emprestimo SET status = 3 WHERE idEmprestimo = ?";
+            this.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, emprestimo.getIdEmprestimo());
+            this.disponivel(1, idLivro);
+            stmt.execute();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

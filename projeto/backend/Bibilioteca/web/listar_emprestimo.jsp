@@ -50,6 +50,9 @@
                                 <a class="btn btn-danger" href="gerenciar_emprestimo.do?acao=deletar&idEmprestimo=${emprestimo.idEmprestimo}&idLivro=${emprestimo.livro.idLivro}">
                                     <i class="bi-trash" style="font-size: 16px; color: white;"></i>
                                 </a>
+                                <a class="btn btn-success" href="gerenciar_emprestimo.do?acao=finalizar&idEmprestimo=${emprestimo.idEmprestimo}&idLivro=${emprestimo.livro.idLivro}">
+                                    <i class="bi-check" style="font-size: 16px; color: white;"></i>
+                                </a>
                             </td>
                         </tr>
                         

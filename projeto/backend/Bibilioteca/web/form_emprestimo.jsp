@@ -30,17 +30,17 @@
                         <label for="idCliente">Cliente</label>
                         <select class="form-control" name="idCliente" id="idCliente" required>
                             <jsp:useBean class="dao.ClienteDAO" id="cliente">
+                                <c:if test="${not empty emprestimo.cliente}">
+                                    <option value="${emprestimo.cliente.idCliente}">
+                                        ${emprestimo.cliente.nome} ${emprestimo.cliente.sobrenome}
+                                    </option>
+                                </c:if>
                                 <c:forEach var="c" items="${cliente.lista}">
                                     <c:if test="${c.idCliente==param.idCliente}">
                                         <option value="${c.idCliente}">
                                             ${c.nome} ${c.sobrenome}
                                         </option>
-                                    </c:if>
-                                    <c:if test="${not empty emprestimo.cliente}">
-                                        <option value="${emprestimo.cliente.idCliente}">
-                                            ${emprestimo.cliente.nome} ${emprestimo.cliente.sobrenome}
-                                        </option>
-                                    </c:if>
+                                    </c:if>                
                                 </c:forEach>
                             </jsp:useBean>
                         </select>
@@ -75,9 +75,15 @@
                     <div class="form-group col-md-4">
                         <label for="status">Status</label>
                         <select name="status" id="status" class="custom-select" required>
-                            <option value="1" selected>Emprestado</option>
-                            <option value="2">Atrasado</option>
-                            <option value="3">Finalizado</option>
+                            <option value="1" <c:if test="${emprestimo.status==1}">
+                                    selected
+                            </c:if>>Emprestado</option>
+                            <option value="2"<c:if test="${emprestimo.status==2}">
+                                    selected
+                            </c:if>>Atrasado</option>
+                            <option value="3"<c:if test="${emprestimo.status==3}">
+                                    selected
+                            </c:if>>Finalizado</option>
                         </select>
                     </div>
                 </div>

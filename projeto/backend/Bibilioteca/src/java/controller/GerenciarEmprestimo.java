@@ -56,7 +56,7 @@ public class GerenciarEmprestimo extends HttpServlet {
                     mensagem = "Acesso Negado!";
                 }
             }
-            
+
             if (acao.equals("deletar")) {
                 if (GerenciarLogin.verificarPermissao(request, response)) {
                     emprestimo.setIdEmprestimo(Integer.parseInt(idEmprestimo));
@@ -70,13 +70,26 @@ public class GerenciarEmprestimo extends HttpServlet {
                 }
             }
 
+            if (acao.equals("finalizar")) {
+                if (GerenciarLogin.verificarPermissao(request, response)) {
+                    emprestimo.setIdEmprestimo(Integer.parseInt(idEmprestimo));
+                    if (dao.finalizar(emprestimo, Integer.parseInt(idLivro))) {
+                        mensagem = "Emprestimo finalizado com sucesso!";
+                    } else {
+                        mensagem = "Erro ao finalizar emprestimo no banco de dados";
+                    }
+                } else {
+                    mensagem = "Acesso Negado";
+                }
+            }
+
         } catch (Exception e) {
             out.print(e);
             mensagem = "Erro ao executar";
         }
         out.println("<script type='text/javascript'>");
         out.println("alert('" + mensagem + "')");
-        out.println("location.href='index.jsp'");
+        out.println("location.href='listar_emprestimo.jsp'");
         out.println("</script>");
     }
 
@@ -149,6 +162,11 @@ public class GerenciarEmprestimo extends HttpServlet {
             EmprestimoDAO dao = new EmprestimoDAO();
 
             if (dao.gravar(emprestimo)) {
+                if (status.equals("3")) {
+                    if (dao.finalizar(emprestimo, Integer.parseInt(idLivro))) {
+                        mensagem = "Gravado com sucesso!\nLivro Disponivel";
+                    }
+                }
                 mensagem = "Gravado com sucesso!";
             } else {
                 mensagem = "Erro ao gravar no banco de dados!";
