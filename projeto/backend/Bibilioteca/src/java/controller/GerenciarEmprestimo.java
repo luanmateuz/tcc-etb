@@ -32,6 +32,7 @@ public class GerenciarEmprestimo extends HttpServlet {
         String acao = request.getParameter("acao");
         String idEmprestimo = request.getParameter("idEmprestimo");
         String idLivro = request.getParameter("idLivro");
+        String idCliente = request.getParameter("idCliente");
         String mensagem = "";
 
         try {
@@ -73,7 +74,7 @@ public class GerenciarEmprestimo extends HttpServlet {
             if (acao.equals("finalizar")) {
                 if (GerenciarLogin.verificarPermissao(request, response)) {
                     emprestimo.setIdEmprestimo(Integer.parseInt(idEmprestimo));
-                    if (dao.finalizar(emprestimo, Integer.parseInt(idLivro))) {
+                    if (dao.finalizar(emprestimo, Integer.parseInt(idLivro), Integer.parseInt(idCliente))) {
                         mensagem = "Emprestimo finalizado com sucesso!";
                     } else {
                         mensagem = "Erro ao finalizar emprestimo no banco de dados";
@@ -152,9 +153,11 @@ public class GerenciarEmprestimo extends HttpServlet {
         emprestimo.setDataDevolucao(dataDevolucaoFormatada);
         emprestimo.setStatus(Integer.parseInt(status));
 
-        if (!(multaMotivo.isEmpty() && multaValor.isEmpty() && multaPaga.isEmpty())) {
+        if (!(multaMotivo.isEmpty() && multaPaga.isEmpty())) {
             emprestimo.setMultaMotivo(multaMotivo);
-            emprestimo.setMultaValor(Double.parseDouble(multaValor));
+            if (!multaValor.isEmpty()) {
+                emprestimo.setMultaValor(Double.parseDouble(multaValor));
+            }
             emprestimo.setMultaPaga(Integer.parseInt(multaPaga));
         }
 
@@ -163,7 +166,7 @@ public class GerenciarEmprestimo extends HttpServlet {
 
             if (dao.gravar(emprestimo)) {
                 if (status.equals("3")) {
-                    if (dao.finalizar(emprestimo, Integer.parseInt(idLivro))) {
+                    if (dao.finalizar(emprestimo, Integer.parseInt(idLivro), Integer.parseInt(idCliente))) {
                         mensagem = "Gravado com sucesso!\nLivro Disponivel";
                     }
                 }

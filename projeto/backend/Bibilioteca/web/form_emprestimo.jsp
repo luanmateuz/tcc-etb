@@ -94,22 +94,34 @@
                 </div>
                 </c:if>
                 
-                <p class="h2 mt-5 mb-4 text-left font-weight-bold">👮🏻 Multar</p>
-                <div class="form-group">
+                <p class="h2 mt-5 mb-4 text-left font-weight-bold" <c:if test="${empty param.acao}">
+                   style="display: none"
+                </c:if>>👮🏻 Multar</p>
+                <div class="form-group" <c:if test="${empty param.acao}">
+                   style="display: none"
+                </c:if>>
                     <label for="multaMotivo">Motivo</label>
-                    <input type="text" class="form-control" name="multaMotivo" id="multaMotivo">
+                    <input type="text" class="form-control" name="multaMotivo" id="multaMotivo" value="${emprestimo.multaMotivo}">
                 </div>
-                <div class="form-row">
+                <div class="form-row" <c:if test="${empty param.acao}">
+                   style="display: none"
+                </c:if>>
                     <div class="form-group col-md-4">
                         <label for="multaValor">Valor R$</label>
-                        <input type="text" class="form-control" name="multaValor" id="multaValor">
+                        <input type="text" class="form-control" name="multaValor" id="multaValor" value="${emprestimo.multaValor}">
                     </div>
                     <div class="form-group col-md-2">
                         <label for="multaPaga">Multa Paga</label>
                         <select name="multaPaga" id="multaPaga" class="custom-select">
-                            <option value="" selected></option>
-                            <option value="1">Sim</option>
-                            <option value="2">Não</option>
+                            <c:if test="${empty param.idCliente}">
+                                <option value="" selected></option>
+                            </c:if>
+                            <option value="1" <c:if test="${emprestimo.multaPaga==1}">
+                                selected
+                            </c:if>>Sim</option>
+                            <option value="2" <c:if test="${emprestimo.multaPaga==2}">
+                                selected
+                            </c:if>>Não</option>
                         </select>
                     </div>
                 </div>
