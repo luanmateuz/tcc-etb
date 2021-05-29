@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Menu;
 import model.Usuario;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -40,7 +41,8 @@ public class GerenciarLogin extends HttpServlet {
             Usuario usuario = new Usuario();
             usuario = dao.getRecuperarUsuario(login);
 
-            if (usuario.getIdUsuario() > 0 && usuario.getSenha().equals(senha)) {
+            if (usuario.getIdUsuario() > 0 && 
+                    BCrypt.checkpw(senha.trim(), usuario.getSenha())) {
                 HttpSession sessao = request.getSession();
                 sessao.setAttribute("ulogado", usuario);
                 response.sendRedirect("index.jsp");

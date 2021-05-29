@@ -106,11 +106,11 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="senha">Senha</label>
-                        <input type="password" class="form-control" name="senha" id="senha" value="${usuario.senha}" required>
+                        <input type="password" class="form-control" name="senha" id="senha" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="confirmarSenha">Confirmar Senha</label>
-                        <input type="password" class="form-control" name="confirmarSenha" id="confirmarSenha" value="${usuario.senha}" required>
+                        <input type="password" class="form-control" name="confirmarSenha" id="confirmarSenha" required>
                     </div>
                 </div>
                 <div class="form-group">

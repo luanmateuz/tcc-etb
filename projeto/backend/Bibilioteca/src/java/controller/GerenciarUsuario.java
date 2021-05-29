@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Perfil;
 import model.Usuario;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -128,7 +129,7 @@ public class GerenciarUsuario extends HttpServlet {
             mensagem = "Todos os campos devem ser preenchidos!";
         }
         
-        if (!senha.equals(confirmarSenha)) {
+        if (!senha.trim().equals(confirmarSenha.trim())) {
             pagina = "history.back()";
             mensagem = "Por favor, confirme a senha";
         } else {
@@ -145,7 +146,10 @@ public class GerenciarUsuario extends HttpServlet {
             usuario.setPerfil(perfil);
 
             usuario.setLogin(login);
-            usuario.setSenha(senha);
+            
+            String complexidade = BCrypt.gensalt(11);
+            usuario.setSenha(BCrypt.hashpw(senha, complexidade));
+            
             usuario.setStatus(Integer.parseInt(status));
             usuario.setEmail(email);
             usuario.setTelefone(telefone);
