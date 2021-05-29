@@ -58,7 +58,7 @@
                                 <a href="gerenciar_usuario.do?acao=alterar&idUsuario=${usuario.idUsuario}" class="btn btn-primary">
                                     <i class="bi-pencil" style="font-size: 16px; color: white;"></i>
                                 </a>
-                                <button class="btn btn-warning">
+                                <button class="btn btn-warning"  onclick="swalWithBootstrap('${usuario.nome}', 'gerenciar_usuario.do?acao=deletar&idUsuario=${usuario.idUsuario}')">
                                     <i class="bi-trash" style="font-size: 16px; color: white;"></i>
                                 </button>
                             </td>
