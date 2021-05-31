@@ -59,7 +59,7 @@
                                 <a href="gerenciar_cliente.do?acao=alterar&idCliente=${cliente.idCliente}" class="btn btn-primary">
                                     <i class="bi-pencil" style="font-size: 16px; color: white;"></i>
                                 </a>
-                                <button class="btn btn-warning"  onclick="confirmarExclusao(${cliente.idCliente}, '${cliente.nome}')">
+                                <button class="btn btn-warning" onclick="swalWithBootstrap(' Cliente ${cliente.nome}', 'gerenciar_cliente.do?acao=deletar&idCliente=${cliente.idCliente}')">
                                     <i class="bi-trash" style="font-size: 16px; color: white;"></i>
                                 </button>
                                 <c:if test="${cliente.status==1}">
@@ -74,13 +74,5 @@
                     </jsp:useBean>
                 </table>               
            </div>
-
-        <script type="text/javascript">
-            function confirmarExclusao(id, nome) {
-                if(confirm("Deseja realmente excluir o cliente " + nome + "?")) {
-                    location.href = "gerenciar_cliente.do?acao=deletar&idCliente=" + id;
-                }
-            } 
-        </script>
 
 <%@include file="templates/footer.jsp" %>

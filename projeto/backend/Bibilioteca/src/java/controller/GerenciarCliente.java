@@ -29,6 +29,8 @@ public class GerenciarCliente extends HttpServlet {
         String acao = request.getParameter("acao");
         String idCliente = request.getParameter("idCliente");
         String mensagem = "";
+        String icon = "";
+        String titulo = "";
 
         try {
             Cliente cliente = new Cliente();
@@ -45,34 +47,44 @@ public class GerenciarCliente extends HttpServlet {
                         request.setAttribute("dataNascimento", sdf.format(cliente.getDataNascimento().getTime()));
                         disp.forward(request, response);
                     } else {
+                        icon = "error";
+                        titulo = "Erro";
                         mensagem = "Cliente nao encontrado";
                     }
                 } else {
-                    mensagem = "Acesso Negado!";
+                    icon = "error";
+                    titulo = "Acesso Negado!";
+                    mensagem = "O Usuario não tem acesso!";
                 }
             }
-            
+
             if (acao.equals("deletar")) {
                 if (GerenciarLogin.verificarPermissao(request, response)) {
                     cliente.setIdCliente(Integer.parseInt(idCliente));
                     if (dao.deletar(cliente)) {
-                        mensagem = "Cliente deletado com sucesso!";
+                        icon = "success";
+                        titulo = "Sucesso!";
+                        mensagem = "O cliente foi deletado!";
                     } else {
+                        icon = "error";
+                        titulo = "Erro";
                         mensagem = "Erro ao deletar cliente do banco de dados";
                     }
                 } else {
-                    mensagem = "Acesso Negado";
+                    icon = "error";
+                    titulo = "Acesso Negado!";
+                    mensagem = "O Usuario não tem acesso!";
                 }
             }
-            
+
         } catch (Exception e) {
             out.print(e);
-            mensagem = "Erro ao executar";
+            icon = "error";
+            titulo = "Erro ao executar";
+            mensagem = "Ocorreu um erro ao executar";
         }
-        out.println("<script type='text/javascript'>");
-        out.println("alert('" + mensagem + "')");
-        out.println("location.href='listar_cliente.jsp'");
-        out.println("</script>");
+        
+        exibirMensagem(icon, titulo, mensagem, response, request);
     }
 
     @Override
@@ -82,7 +94,9 @@ public class GerenciarCliente extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String mensagem = "";
-        
+        String icon = "";
+        String titulo = "";
+
         String idCliente = request.getParameter("idCliente");
         String nome = request.getParameter("nome");
         String sobrenome = request.getParameter("sobrenome");
@@ -96,6 +110,8 @@ public class GerenciarCliente extends HttpServlet {
             dataNascimentoFormatada.setTime(date);
         } catch (ParseException ex) {
             System.out.println("Exception: " + ex);
+            icon = "error";
+            titulo = "Erro";
             mensagem = "Erro de convesção de data";
         }
 
@@ -117,8 +133,10 @@ public class GerenciarCliente extends HttpServlet {
         if (!idCliente.isEmpty()) {
             cliente.setIdCliente(Integer.parseInt(idCliente));
         }
-        
+
         if (nome.equals("")) {
+            icon = "error";
+            titulo = "Ero";
             mensagem = "Todos os campos devem ser preenchidos!";
         } else {
             cliente.setNome(nome);
@@ -141,23 +159,41 @@ public class GerenciarCliente extends HttpServlet {
                 ClienteDAO dao = new ClienteDAO();
 
                 if (dao.gravar(cliente)) {
+                    icon = "success";
+                    titulo = "Sucesso!";
                     mensagem = "Gravado com sucesso!";
                 } else {
+                    icon = "error";
+                    titulo = "Erro";
                     mensagem = "Erro ao gravar no banco de dados!";
                 }
 
             } catch (Exception e) {
                 out.print(e);
+                icon = "error";
+                titulo = "Erro";
                 mensagem = "Erro ao executar";
             }
         }
 
-        out.println("<script type='text/javascript'>");
-        out.println("alert('" + mensagem + "')");
-        out.println("location.href='listar_cliente.jsp'");
-        out.println("</script>");
+        exibirMensagem(icon, titulo, mensagem, response, request);
     }
 
+    private static void exibirMensagem(String icon, String title, String mensagem, HttpServletResponse response, HttpServletRequest request) {
+
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            RequestDispatcher dispatcher = request.getRequestDispatcher("templates/base.jsp");
+            dispatcher.include(request, response);
+            String redirect = request.getContextPath() + "/listar_cliente.jsp";
+
+            out.println("<script>showAlertBase('" + icon + "', '" + title + "', '" + mensagem + "', '" + redirect + "');</script>");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     @Override
     public String getServletInfo() {
         return "Short description";

@@ -38,27 +38,13 @@ function showAlertSucessTimer(title) {
   });
 }
 
-function showAlertSucess(title, redirect, redirectAlter = redirect) {
+function showAlertBase(icon, title, description, redirect, redirectAlter = redirect) {
   Swal.fire({
-    icon: 'success',
-    title: title,
-    text: 'Click para continuar',
-    showConfirmButton: true,
-    showButtonText: 'OK',
-  }).then((result) => {
-    if (result.isConfirmed) {
-      location.href = (redirect);
-    } else {
-      location.href = (redirectAlter);
-    }
-  });
-}
-
-function showAlertError(title, description, redirect, redirectAlter = redirect) {
-  Swal.fire({
-    icon: 'error',
+    icon: icon,
     title: title,
     text: description,
+    background: '#FFFFFF',
+    backdrop: '#DDD',
     showConfirmButton: true,
     showButtonText: 'OK',
   }).then((result) => {
@@ -69,44 +55,6 @@ function showAlertError(title, description, redirect, redirectAlter = redirect) 
     }
   });
 }
-
-function swalWithBootstrap(livro) {
-  const swalWithBootstrapButtons = Swal.mixin({
-    customClass: {
-      confirmButton: 'btn btn-outline-success',
-      cancelButton: 'btn btn-outline-danger mr-3'
-    },
-    buttonsStyling: false
-  })
-
-  swalWithBootstrapButtons.fire({
-    title: 'Tem certeza? ',
-    text: "Você não poderá reverter isso!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Sim, exclua!',
-    cancelButtonText: 'Não, cancele!',
-    reverseButtons: true
-  }).then((result) => {
-    if (result.isConfirmed) {
-      swalWithBootstrapButtons.fire(
-        'Excluído!',
-        `O livro ${livro} foi excluído.`,
-        'success'
-      )
-    } else if (
-      /* Read more about handling dismissals below */
-      result.dismiss === Swal.DismissReason.cancel
-    ) {
-      swalWithBootstrapButtons.fire(
-        'Cancelado',
-        `O livro ${livro} está seguro :)`,
-        'error'
-      )
-    }
-  });
-}
-
 
 function swalWithBootstrap(funcao, link) {
   const swalWithBootstrapButtons = Swal.mixin({
