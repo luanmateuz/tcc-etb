@@ -15,7 +15,7 @@ import model.Perfil;
  * @author luan
  */
 public class GerenciarPerfil extends HttpServlet {
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -23,6 +23,8 @@ public class GerenciarPerfil extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String mensagem = "";
+        String icon = "";
+        String titulo = "";
 
         String acao = request.getParameter("acao");
         String idPerfil = request.getParameter("idPerfil");
@@ -40,10 +42,13 @@ public class GerenciarPerfil extends HttpServlet {
                         request.setAttribute("perfil", perfil);
                         disp.forward(request, response);
                     } else {
-                        System.out.println("perfil n encontrado");
+                        icon = "error";
+                        titulo = "Erro";
                         mensagem = "Perfil não encontrado!";
                     }
                 } else {
+                    icon = "error";
+                    titulo = "Erro";
                     mensagem = "Acesso Negado!";
                 }
             }
@@ -52,23 +57,28 @@ public class GerenciarPerfil extends HttpServlet {
                 if (GerenciarLogin.verificarPermissao(request, response)) {
                     int id = Integer.parseInt(idPerfil);
                     if (dao.deletar(id)) {
+                        icon = "success";
+                        titulo = "Sucesso!";
                         mensagem = "Perfil deletado!";
                     } else {
-                        mensagem = "Erro ao deletar perfil! Este perfil contem menus vinculados!";
+                        icon = "error";
+                        titulo = "Erro ao deletar Perfil";
+                        mensagem = "Este perfil contem menus vinculados!";
                     }
                 } else {
+                    icon = "error";
+                    titulo = "Erro";
                     mensagem = "Acesso Negado!";
                 }
             }
         } catch (Exception e) {
             out.print(e.getMessage());
+            icon = "error";
+            titulo = "Erro";
             mensagem = "Erro ao executar";
         }
 
-        out.println("<script type='text/javascript'>");
-        out.println("alert('" + mensagem + "')");
-        out.println("location.href='listar_perfil.jsp'");
-        out.println("</script>");
+        exibirMensagem(icon, titulo, mensagem, response, request);
     }
 
     @Override
@@ -80,6 +90,8 @@ public class GerenciarPerfil extends HttpServlet {
         String idPerfil = request.getParameter("idPerfil");
         String nome = request.getParameter("nome");
         String mensagem = "";
+        String icon = "";
+        String titulo = "";
 
         try {
             Perfil perfil = new Perfil();
@@ -90,23 +102,44 @@ public class GerenciarPerfil extends HttpServlet {
             }
 
             if (nome.equals("") || nome.isEmpty()) {
+                icon = "error";
+                titulo = "Erro";
                 mensagem = "Campos obrigatorios deveram ser preenchidos!";
             } else {
                 perfil.setNome(nome);
                 if (dao.gravar(perfil)) {
+                    icon = "success";
+                    titulo = "Sucesso!";
                     mensagem = "Gravado com sucesso!";
                 } else {
+                    icon = "error";
+                    titulo = "Erro";
                     mensagem = "Erro ao gravar no banco de dados!";
                 }
             }
 
-            out.println("<script type='text/javascript'>");
-            out.println("alert('" + mensagem + "')");
-            out.println("location.href='listar_perfil.jsp'");
-            out.println("</script>");
         } catch (Exception e) {
             out.print(e);
+            icon = "error";
+            titulo = "Erro";
             mensagem = "Erro ao executar";
+        }
+
+        exibirMensagem(icon, titulo, mensagem, response, request);
+    }
+
+    private static void exibirMensagem(String icon, String title, String mensagem, HttpServletResponse response, HttpServletRequest request) {
+
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            RequestDispatcher dispatcher = request.getRequestDispatcher("templates/base.jsp");
+            dispatcher.include(request, response);
+            String redirect = request.getContextPath() + "/listar_perfil.jsp";
+
+            out.println("<script>showAlertBase('" + icon + "', '" + title + "', '" + mensagem + "', '" + redirect + "');</script>");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

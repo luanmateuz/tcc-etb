@@ -31,8 +31,10 @@
                     </div>
                 </div>
                     
-                <input class="btn btn-outline-success float-right" type="submit" value="<%=acao%>" onclick="toast()">
-                <input class="btn btn-outline-warning float-right mr-3" type="reset" value="Limpar">
+                <input class="btn btn-outline-success float-right" type="submit" value="<%=acao%>">
+                <c:if test="${empty param.acao}">
+                    <input class="btn btn-outline-warning float-right mr-3" type="reset" value="Limpar">
+                </c:if>
             </form>
                     
 <%@include file="templates/footer.jsp" %>

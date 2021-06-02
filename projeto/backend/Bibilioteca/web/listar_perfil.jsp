@@ -38,7 +38,7 @@
                                     <a href="gerenciar_perfil.do?acao=alterar&idPerfil=${perfil.idPerfil}" class="btn btn-primary">
                                         <i class="bi-pencil" style="font-size: 16px; color: white;"></i>
                                     </a>
-                                    <button class="btn btn-warning" onclick="swalWithBootstrap('${perfil.nome}', 'gerenciar_perfil.do?acao=deletar&idPerfil=' + ${perfil.idPerfil})">
+                                    <button class="btn btn-warning" onclick="swalWithBootstrap('Perfil ${perfil.nome}', 'gerenciar_perfil.do?acao=deletar&idPerfil=' + ${perfil.idPerfil})">
                                         <i class="bi-trash" style="font-size: 16px; color: white;"></i>
                                     </button>
                                     <a href="gerenciar_menu_perfil.do?acao=gerenciar&idPerfil=${perfil.idPerfil}" class="btn btn-secondary">
