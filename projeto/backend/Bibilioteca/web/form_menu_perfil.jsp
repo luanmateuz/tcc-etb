@@ -58,7 +58,7 @@
                                     </c:if>
                                 </td>
                                 <td>
-                                    <button class="btn btn-warning" onclick="swalWithBootstrap('${menu.nome}','gerenciar_menu_perfil.do?acao=desvincular&idMenu=' + ${menu.idMenu} + '&idPerfil=' + ${perfilv.idPerfil})">
+                                    <button class="btn btn-warning" onclick="swalWithBootstrap('Menu ${menu.nome}','gerenciar_menu_perfil.do?acao=desvincular&idMenu=' + ${menu.idMenu} + '&idPerfil=' + ${perfilv.idPerfil})">
                                         <i class="bi-trash" style="font-size: 16px; color: white;"></i>
                                     </button>
                                 </td>

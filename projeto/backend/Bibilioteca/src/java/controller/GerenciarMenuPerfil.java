@@ -25,6 +25,9 @@ public class GerenciarMenuPerfil extends HttpServlet {
         String acao = request.getParameter("acao");
         String idPerfil = request.getParameter("idPerfil");
         String mensagem = "";
+        String icon = "";
+        String titulo = "";
+        String link = "";
 
         try {
             Perfil perfil = new Perfil();
@@ -39,9 +42,14 @@ public class GerenciarMenuPerfil extends HttpServlet {
                         request.setAttribute("perfilv", perfil);
                         disp.forward(request, response);
                     } else {
+                        icon = "error";
+                        titulo = "Erro";
                         mensagem = "Perfil nao encontrado!";
+                        link = "/listar_perfil.jsp";
                     }
                 } else {
+                    icon = "error";
+                    titulo = "Erro";
                     mensagem = "Acesso Negado!";
                 }
             }
@@ -50,27 +58,34 @@ public class GerenciarMenuPerfil extends HttpServlet {
                 if (GerenciarLogin.verificarPermissao(request, response)) {
                     String idMenu = request.getParameter("idMenu");
                     if (idMenu.equals("")) {
+                        icon = "error";
+                        titulo = "Erro";
                         mensagem = "O campo idMenu deve ser selecionado!";
                     } else {
                         if (dao.desvincular(Integer.parseInt(idMenu), Integer.parseInt(idPerfil))) {
+                            icon = "success";
+                            titulo = "Sucesso!";
                             mensagem = "Desvinculado com sucesso!";
                         } else {
+                            icon = "error";
+                            titulo = "Erro";
                             mensagem = "Erro ao desvincular!";
                         }
                     }
                 } else {
+                    icon = "error";
+                    titulo = "Erro";
                     mensagem = "Acesso Negado!";
                 }
             }
         } catch (Exception e) {
             out.print("Erro: " + e);
+            icon = "error";
+            titulo = "Erro";
             mensagem = "Erro ao executar!";
         }
 
-        out.println("<script type='text/javascript'>");
-        out.println("alert('" + mensagem + "')");
-        out.println("location.href='gerenciar_menu_perfil.do?acao=gerenciar&idPerfil=" + idPerfil + "'");
-        out.println("</script>");
+        exibirMensagem(idPerfil, icon, titulo, mensagem, link, response, request);
     }
 
     @Override
@@ -82,28 +97,54 @@ public class GerenciarMenuPerfil extends HttpServlet {
         String idPerfil = request.getParameter("idPerfil");
         String idMenu = request.getParameter("idMenu");
         String mensagem = "";
+        String icon = "";
+        String titulo = "";
+        String link = "";
 
         try {
 
             if (idPerfil.equals("") || idMenu.equals("")) {
+                icon = "error";
+                titulo = "Erro";
                 mensagem = "Campos obrigatorios devem ser selecionados";
             } else {
                 PerfilDAO dao = new PerfilDAO();
                 if (dao.vincular(Integer.parseInt(idMenu), Integer.parseInt(idPerfil))) {
+                    icon = "success";
+                    titulo = "Sucesso!";
                     mensagem = "Vinculado com sucesso";
                 } else {
+                    icon = "error";
+                    titulo = "Erro";
                     mensagem = "Erro ao vincular o menu ao perfil";
                 }
             }
         } catch (ClassNotFoundException | NumberFormatException e) {
             out.print("Error: " + e);
+            icon = "error";
+            titulo = "Erro";
             mensagem = "Erro ao executar";
         }
 
-        out.println("<script type='text/javascript'>");
-        out.println("alert('" + mensagem + "')");
-        out.println("location.href='gerenciar_menu_perfil.do?acao=gerenciar&idPerfil=" + idPerfil + "'");
-        out.println("</script>");
+        exibirMensagem(idPerfil, icon, titulo, mensagem, link, response, request);
+    }
+
+    private static void exibirMensagem(String idPerfil, String icon, String title, String mensagem, String link, HttpServletResponse response, HttpServletRequest request) {
+
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            RequestDispatcher dispatcher = request.getRequestDispatcher("templates/base.jsp");
+            dispatcher.include(request, response);
+            String redirect = request.getContextPath() + "/gerenciar_menu_perfil.do?acao=gerenciar&idPerfil=" + idPerfil;
+
+            if (!link.isEmpty()) {
+                redirect = request.getContextPath() + link;
+            }
+            out.println("<script>showAlertBase('" + icon + "', '" + title + "', '" + mensagem + "', '" + redirect + "');</script>");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
