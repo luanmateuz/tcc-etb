@@ -80,7 +80,7 @@
                             </c:if>>Emprestado</option>
                             <option value="2"<c:if test="${emprestimo.status==2}">
                                     selected
-                            </c:if>>Atrasado</option>
+                            </c:if>>Multado</option>
                             <option value="3"<c:if test="${emprestimo.status==3}">
                                     selected
                             </c:if>>Finalizado</option>
@@ -127,7 +127,9 @@
                 </div>
 
                 <input class="btn btn-outline-success float-right" type="submit" value="<%=acao%>">
-                <input class="btn btn-outline-warning float-right mr-3" type="reset" value="Limpar">
+                <c:if test="${empty param.acao}">
+                    <input class="btn btn-outline-warning float-right mr-3" type="reset" value="Limpar">
+                </c:if>
             </form>
 
 <%@include file="templates/footer.jsp" %>

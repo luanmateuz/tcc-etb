@@ -34,6 +34,8 @@ public class GerenciarEmprestimo extends HttpServlet {
         String idLivro = request.getParameter("idLivro");
         String idCliente = request.getParameter("idCliente");
         String mensagem = "";
+        String icon = "";
+        String titulo = "";
 
         try {
             Emprestimo emprestimo = new Emprestimo();
@@ -51,9 +53,13 @@ public class GerenciarEmprestimo extends HttpServlet {
                         request.setAttribute("dataDevolucao", sdf.format(emprestimo.getDataDevolucao().getTime()));
                         disp.forward(request, response);
                     } else {
+                        icon = "error";
+                        titulo = "Erro";
                         mensagem = "Emprestimo nao encontrado";
                     }
                 } else {
+                    icon = "error";
+                    titulo = "Erro";
                     mensagem = "Acesso Negado!";
                 }
             }
@@ -62,11 +68,17 @@ public class GerenciarEmprestimo extends HttpServlet {
                 if (GerenciarLogin.verificarPermissao(request, response)) {
                     emprestimo.setIdEmprestimo(Integer.parseInt(idEmprestimo));
                     if (dao.deletar(emprestimo, Integer.parseInt(idLivro))) {
+                        icon = "success";
+                        titulo = "Sucesso!";
                         mensagem = "Emprestimo deletado com sucesso!";
                     } else {
+                        icon = "error";
+                        titulo = "Erro";
                         mensagem = "Erro ao deletar emprestimo do banco de dados";
                     }
                 } else {
+                    icon = "error";
+                    titulo = "Erro";
                     mensagem = "Acesso Negado";
                 }
             }
@@ -75,23 +87,29 @@ public class GerenciarEmprestimo extends HttpServlet {
                 if (GerenciarLogin.verificarPermissao(request, response)) {
                     emprestimo.setIdEmprestimo(Integer.parseInt(idEmprestimo));
                     if (dao.finalizar(emprestimo, Integer.parseInt(idLivro), Integer.parseInt(idCliente))) {
+                        icon = "success";
+                        titulo = "Sucesso!";
                         mensagem = "Emprestimo finalizado com sucesso!";
                     } else {
+                        icon = "error";
+                        titulo = "Erro";
                         mensagem = "Erro ao finalizar emprestimo no banco de dados";
                     }
                 } else {
+                    icon = "error";
+                    titulo = "Erro";
                     mensagem = "Acesso Negado";
                 }
             }
 
         } catch (Exception e) {
             out.print(e);
+            icon = "error";
+            titulo = "Erro";
             mensagem = "Erro ao executar";
         }
-        out.println("<script type='text/javascript'>");
-        out.println("alert('" + mensagem + "')");
-        out.println("location.href='listar_emprestimo.jsp'");
-        out.println("</script>");
+
+        exibirMensagem(icon, titulo, mensagem, response, request);
     }
 
     @Override
@@ -101,6 +119,8 @@ public class GerenciarEmprestimo extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String mensagem = "";
+        String icon = "";
+        String titulo = "";
 
         String idEmprestimo = request.getParameter("idEmprestimo");
         String idUsuario = request.getParameter("idUsuario");
@@ -123,6 +143,8 @@ public class GerenciarEmprestimo extends HttpServlet {
             dataDevolucaoFormatada.setTime(dateDevolucao);
         } catch (ParseException ex) {
             System.out.println("Exception: " + ex);
+            icon = "error";
+            titulo = "Erro";
             mensagem = "Erro de convesção de data";
         }
 
@@ -167,22 +189,42 @@ public class GerenciarEmprestimo extends HttpServlet {
             if (dao.gravar(emprestimo)) {
                 if (status.equals("3")) {
                     if (dao.finalizar(emprestimo, Integer.parseInt(idLivro), Integer.parseInt(idCliente))) {
+                        icon = "success";
+                        titulo = "Sucesso!";
                         mensagem = "Gravado com sucesso!\nLivro Disponivel";
                     }
                 }
+                icon = "success";
+                titulo = "Sucesso!";
                 mensagem = "Gravado com sucesso!";
             } else {
+                icon = "error";
+                titulo = "Erro";
                 mensagem = "Erro ao gravar no banco de dados!";
             }
         } catch (Exception e) {
             out.print(e);
+            icon = "error";
+            titulo = "Erro";
             mensagem = "Erro ao executar";
         }
 
-        out.println("<script type='text/javascript'>");
-        out.println("alert('" + mensagem + "')");
-        out.println("location.href='listar_emprestimo.jsp'");
-        out.println("</script>");
+        exibirMensagem(icon, titulo, mensagem, response, request);
+    }
+
+    private static void exibirMensagem(String icon, String title, String mensagem, HttpServletResponse response, HttpServletRequest request) {
+
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            RequestDispatcher dispatcher = request.getRequestDispatcher("templates/base.jsp");
+            dispatcher.include(request, response);
+            String redirect = request.getContextPath() + "/listar_emprestimo.jsp";
+
+            out.println("<script>showAlertBase('" + icon + "', '" + title + "', '" + mensagem + "', '" + redirect + "');</script>");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

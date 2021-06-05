@@ -36,7 +36,7 @@
                                     <span class="badge badge-primary p-3">Emprestado</span>
                                 </c:if>
                                 <c:if test="${emprestimo.status==2}">
-                                    <span class="badge badge-danger p-3">Atrasado</span>
+                                    <span class="badge badge-danger p-3">Multado</span>
                                 </c:if>
                                 <c:if test="${emprestimo.status==3}">
                                     <span class="badge badge-success p-3">Finalizado</span>
@@ -47,12 +47,14 @@
                                 <a href="gerenciar_emprestimo.do?acao=alterar&idEmprestimo=${emprestimo.idEmprestimo}" class="btn btn-primary">
                                     <i class="bi-pencil" style="font-size: 16px; color: white;"></i>
                                 </a>
-                                <a class="btn btn-danger" href="gerenciar_emprestimo.do?acao=deletar&idEmprestimo=${emprestimo.idEmprestimo}&idLivro=${emprestimo.livro.idLivro}">
+                                <button class="btn btn-danger" onclick="swalWithBootstrap('Emprestimo ${emprestimo.idEmprestimo}', 'gerenciar_emprestimo.do?acao=deletar&idEmprestimo=${emprestimo.idEmprestimo}&idLivro=${emprestimo.livro.idLivro}')">
                                     <i class="bi-trash" style="font-size: 16px; color: white;"></i>
-                                </a>
+                                </button>
+                                <c:if test="${emprestimo.status!=2}">
                                 <a class="btn btn-success" href="gerenciar_emprestimo.do?acao=finalizar&idEmprestimo=${emprestimo.idEmprestimo}&idLivro=${emprestimo.livro.idLivro}&idCliente=${emprestimo.cliente.idCliente}">
                                     <i class="bi-check" style="font-size: 16px; color: white;"></i>
                                 </a>
+                                </c:if>
                             </td>
                         </tr>
                         
