@@ -86,10 +86,7 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="status" class="control-label">Status</label>
-                        <select class="form-control custom-select" name="status" id="status"
-                                <c:if test="${usuario.nome==ulogado.nome}">
-                                    disabled
-                                </c:if>>
+                        <select class="form-control custom-select" name="status" id="status">
                             <option value="1" 
                                     <c:if test="${usuario.status==1}"> 
                                         selected=""
@@ -153,7 +150,9 @@
                 </div>
 
                 <input class="btn btn-outline-success float-right" type="submit" value="<%=acao%>">
-                <input class="btn btn-outline-warning float-right mr-3" type="reset" value="Limpar">
+                <c:if test="${empty param.acao}">
+                    <input class="btn btn-outline-warning float-right mr-3" type="reset" value="Limpar">
+                </c:if>
             </form>
 
 <%@include file="templates/footer.jsp" %>

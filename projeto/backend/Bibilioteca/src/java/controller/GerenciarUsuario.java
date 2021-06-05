@@ -31,6 +31,9 @@ public class GerenciarUsuario extends HttpServlet {
         String acao = request.getParameter("acao");
         String idUsuario = request.getParameter("idUsuario");
         String mensagem = "";
+        String icon = "";
+        String titulo = "";
+        String link = "";
 
         try {
             Usuario usuario = new Usuario();
@@ -47,9 +50,13 @@ public class GerenciarUsuario extends HttpServlet {
                         request.setAttribute("dataNascimento", sdf.format(usuario.getDataNascimento().getTime()));
                         disp.forward(request, response);
                     } else {
+                        icon = "error";
+                        titulo = "Erro";
                         mensagem = "Usuario nao encontrado";
                     }
                 } else {
+                    icon = "error";
+                    titulo = "Erro";
                     mensagem = "Acesso Negado!";
                 }
             }
@@ -58,22 +65,28 @@ public class GerenciarUsuario extends HttpServlet {
                 if (GerenciarLogin.verificarPermissao(request, response)) {
                     usuario.setIdUsuario(Integer.parseInt(idUsuario));
                     if (dao.deletar(usuario)) {
+                        icon = "success";
+                        titulo = "Sucesso!";
                         mensagem = "Desativado com sucesso";
                     } else {
+                        icon = "error";
+                        titulo = "Erro";
                         mensagem = "erro ao desativar o usuario";
                     }
                 } else {
+                    icon = "error";
+                    titulo = "Erro";
                     mensagem = "Acesso Negado!";
                 }
             }
         } catch (Exception e) {
             out.print(e);
+            icon = "error";
+            titulo = "Erro";
             mensagem = "Erro ao executar";
         }
-        out.println("<script type='text/javascript'>");
-        out.println("alert('" + mensagem + "')");
-        out.println("location.href='listar_usuario.jsp'");
-        out.println("</script>");
+
+        exibirMensagem(icon, titulo, mensagem, link, response, request);
     }
 
     @Override
@@ -83,8 +96,10 @@ public class GerenciarUsuario extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String mensagem = "";
-        String pagina = "location.href='listar_usuario.jsp'";
-        
+        String link = "";
+        String icon = "";
+        String titulo = "";
+
         String idUsuario = request.getParameter("idUsuario");
         String nome = request.getParameter("nome");
         String sobrenome = request.getParameter("sobrenome");
@@ -98,6 +113,9 @@ public class GerenciarUsuario extends HttpServlet {
             dataNascimentoFormatada.setTime(date);
         } catch (ParseException ex) {
             System.out.println("Exception: " + ex);
+
+            icon = "error";
+            titulo = "Erro";
             mensagem = "Erro de convesção de data";
         }
 
@@ -124,13 +142,17 @@ public class GerenciarUsuario extends HttpServlet {
         if (!idUsuario.isEmpty()) {
             usuario.setIdUsuario(Integer.parseInt(idUsuario));
         }
-        
+
         if (nome.equals("") || login.equals("") || senha.equals("") || status.equals("") || idPerfil.equals("")) {
+            icon = "error";
+            titulo = "Erro";
             mensagem = "Todos os campos devem ser preenchidos!";
         }
-        
+
         if (!senha.trim().equals(confirmarSenha.trim())) {
-            pagina = "history.back()";
+            link = "/gerenciar_usuario.do?acao=alterar&idUsuario=" + idUsuario;
+            icon = "error";
+            titulo = "Erro";
             mensagem = "Por favor, confirme a senha";
         } else {
             usuario.setNome(nome);
@@ -146,10 +168,10 @@ public class GerenciarUsuario extends HttpServlet {
             usuario.setPerfil(perfil);
 
             usuario.setLogin(login);
-            
+
             String complexidade = BCrypt.gensalt(11);
             usuario.setSenha(BCrypt.hashpw(senha, complexidade));
-            
+
             usuario.setStatus(Integer.parseInt(status));
             usuario.setEmail(email);
             usuario.setTelefone(telefone);
@@ -165,21 +187,43 @@ public class GerenciarUsuario extends HttpServlet {
                 UsuarioDAO dao = new UsuarioDAO();
 
                 if (dao.gravar(usuario)) {
+                    icon = "success";
+                    titulo = "Sucesso!";
                     mensagem = "Gravado com sucesso!";
                 } else {
+                    icon = "error";
+                    titulo = "Erro";
                     mensagem = "Erro ao gravar no banco de dados!";
                 }
 
             } catch (Exception e) {
                 out.print(e);
+                icon = "error";
+                titulo = "Erro";
                 mensagem = "Erro ao executar";
             }
         }
 
-        out.println("<script type='text/javascript'>");
-        out.println("alert('" + mensagem + "')");
-        out.println(pagina);
-        out.println("</script>");
+        exibirMensagem(icon, titulo, mensagem, link, response, request);
+    }
+
+    private static void exibirMensagem(String icon, String title, String mensagem, String link, HttpServletResponse response, HttpServletRequest request) {
+
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            RequestDispatcher dispatcher = request.getRequestDispatcher("templates/base.jsp");
+            dispatcher.include(request, response);
+            String redirect = request.getContextPath() + "/listar_usuario.jsp";
+
+            if (!link.isEmpty()) {
+                redirect = request.getContextPath() + link;
+            }
+
+            out.println("<script>showAlertBase('" + icon + "', '" + title + "', '" + mensagem + "', '" + redirect + "'); </script>");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
