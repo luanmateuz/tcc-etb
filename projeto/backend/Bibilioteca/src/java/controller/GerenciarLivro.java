@@ -33,6 +33,8 @@ public class GerenciarLivro extends HttpServlet {
         String acao = request.getParameter("acao");
         String idLivro = request.getParameter("idLivro");
         String mensagem = "";
+        String icon = "";
+        String tituloAlert = "";
 
         try {
             Livro livro = new Livro();
@@ -47,13 +49,17 @@ public class GerenciarLivro extends HttpServlet {
                         request.setAttribute("livro", livro);
                         disp.forward(request, response);
                     } else {
-                        mensagem = "Cliente nao encontrado";
+                        icon = "error";
+                        tituloAlert = "Erro";
+                        mensagem = "Livro nao encontrado";
                     }
                 } else {
+                    icon = "error";
+                    tituloAlert = "Erro";
                     mensagem = "Acesso Negado!";
                 }
             }
-            
+
             if (acao.equals("alterar")) {
                 if (GerenciarLogin.verificarPermissao(request, response)) {
                     livro = dao.getCarregaPorId(Integer.parseInt(idLivro));
@@ -63,33 +69,43 @@ public class GerenciarLivro extends HttpServlet {
                         request.setAttribute("livro", livro);
                         disp.forward(request, response);
                     } else {
-                        mensagem = "Cliente nao encontrado";
+                        icon = "error";
+                        tituloAlert = "Erro";
+                        mensagem = "Livro nao encontrado";
                     }
                 } else {
+                    icon = "error";
+                    tituloAlert = "Erro";
                     mensagem = "Acesso Negado!";
                 }
             }
-            
+
             if (acao.equals("deletar")) {
                 if (GerenciarLogin.verificarPermissao(request, response)) {
                     int id = Integer.parseInt(idLivro);
                     if (dao.deletar(id)) {
+                        icon = "success";
+                        tituloAlert = "Sucesso";
                         mensagem = "Livro deletado!";
                     } else {
+                        icon = "error";
+                        tituloAlert = "Erro";
                         mensagem = "Erro ao deletar livro!";
                     }
                 } else {
+                    icon = "error";
+                    tituloAlert = "Erro";
                     mensagem = "Acesso negado!";
                 }
             }
         } catch (Exception e) {
             out.print(e);
+            icon = "error";
+            tituloAlert = "Erro";
             mensagem = "Erro ao executar";
         }
-        out.println("<script type='text/javascript'>");
-        out.println("alert('" + mensagem + "')");
-        out.println("location.href='index.jsp'");
-        out.println("</script>");
+
+        exibirMensagem(icon, tituloAlert, mensagem, response, request);
     }
 
     @Override
@@ -99,6 +115,8 @@ public class GerenciarLivro extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String mensagem = "";
+        String icon = "";
+        String tituloAlert = "";
 
         String idLivro = request.getParameter("idLivro");
         String titulo = request.getParameter("titulo");
@@ -130,11 +148,13 @@ public class GerenciarLivro extends HttpServlet {
             File file = new File(pastaUpload, nomeImagem);
 
             try (InputStream input = conteudoImagem) {
-                Files.copy(input, file.toPath(),  StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
                 livro.setImagem(nomeImagem);
             } catch (IOException ex) {
                 System.out.println("Exception: " + ex);
+                icon = "error";
+                tituloAlert = "Erro";
                 mensagem = "Erro ao fazer upload de imagem";
             }
         } else {
@@ -144,7 +164,7 @@ public class GerenciarLivro extends HttpServlet {
         if (!idLivro.isEmpty()) {
             livro.setIdLivro(Integer.parseInt(idLivro));
         }
-        
+
         livro.setTitulo(titulo);
         livro.setDescricao(descricao);
         livro.setAutor(autor);
@@ -159,19 +179,37 @@ public class GerenciarLivro extends HttpServlet {
         try {
             LivroDAO dao = new LivroDAO();
             if (dao.gravar(livro)) {
+                icon = "success";
+                tituloAlert = "Sucesso";
                 mensagem = "Gravado com sucesso!";
             } else {
+                icon = "error";
+                tituloAlert = "Erro";
                 mensagem = "Erro ao gravar no banco de dados!";
             }
         } catch (Exception e) {
             out.print(e);
+            icon = "error";
+            tituloAlert = "Erro";
             mensagem = "Erro ao executar";
         }
 
-        out.println("<script type='text/javascript'>");
-        out.println("alert('" + mensagem + "')");
-        out.println("location.href='index.jsp'");
-        out.println("</script>");
+        exibirMensagem(icon, tituloAlert, mensagem, response, request);
+    }
+
+    private static void exibirMensagem(String icon, String title, String mensagem, HttpServletResponse response, HttpServletRequest request) {
+
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            RequestDispatcher dispatcher = request.getRequestDispatcher("templates/base.jsp");
+            dispatcher.include(request, response);
+            String redirect = request.getContextPath() + "/index.jsp";
+
+            out.println("<script>showAlertBase('" + icon + "', '" + title + "', '" + mensagem + "', '" + redirect + "');</script>");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

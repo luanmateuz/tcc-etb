@@ -54,7 +54,7 @@
 
                 <div class="opcoes mt-3">
                     <a href="gerenciar_livro.do?acao=alterar&idLivro=${livro.idLivro}" class="btn btn-outline-primary float-right">Alterar</a>
-                    <button class="btn btn-outline-danger float-right mr-3" onclick="swalWithBootstrap('${livro.titulo}', 'gerenciar_livro.do?acao=deletar&idLivro=' + ${livro.idLivro})">Excluir</button>
+                    <button class="btn btn-outline-danger float-right mr-3" onclick="swalWithBootstrap('Livro ${livro.titulo}', 'gerenciar_livro.do?acao=deletar&idLivro=' + ${livro.idLivro})">Excluir</button>
                 </div>
             </div>
         </div>
