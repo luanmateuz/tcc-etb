@@ -10,7 +10,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a href="form_usuario.jsp" class="btn btn-outline-primary">Cadastrar Funcionario</a>
+                        <a href="form_usuario.jsp" class="btn btn-outline-primary">Cadastrar Usuario</a>
                     </li>
                   </ul>
                   <form class="form-inline my-2 my-lg-0">
