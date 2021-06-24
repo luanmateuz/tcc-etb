@@ -11,6 +11,8 @@
 <script>
     $('[data-toggle="${id}"]').datepicker(
             {
+                autoHide: true,        
+                startDate: new Date(),
                 format: 'dd/MM/yyyy',
                 days: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
                 daysMin: ['D','S','T','Q','Q','S','S'],

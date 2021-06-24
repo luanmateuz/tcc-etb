@@ -36,6 +36,7 @@ public class GerenciarEmprestimo extends HttpServlet {
         String mensagem = "";
         String icon = "";
         String titulo = "";
+        String link = "";
 
         try {
             Emprestimo emprestimo = new Emprestimo();
@@ -109,7 +110,7 @@ public class GerenciarEmprestimo extends HttpServlet {
             mensagem = "Erro ao executar";
         }
 
-        exibirMensagem(icon, titulo, mensagem, response, request);
+        exibirMensagem(icon, titulo, mensagem, link, response, request);
     }
 
     @Override
@@ -121,6 +122,7 @@ public class GerenciarEmprestimo extends HttpServlet {
         String mensagem = "";
         String icon = "";
         String titulo = "";
+        String link = "";
 
         String idEmprestimo = request.getParameter("idEmprestimo");
         String idUsuario = request.getParameter("idUsuario");
@@ -136,83 +138,102 @@ public class GerenciarEmprestimo extends HttpServlet {
 
             Date dateEntrega = date.parse(dataEntrega);
             dataEntregaFormatada = Calendar.getInstance();
-            dataEntregaFormatada.setTime(dateEntrega);
 
             Date dateDevolucao = date.parse(dataDevolucao);
             dataDevolucaoFormatada = Calendar.getInstance();
-            dataDevolucaoFormatada.setTime(dateDevolucao);
+
+            System.out.println("dataEntregaFormatada.before(dataDevolucao)) = " + dateEntrega.before(dateDevolucao));
+            System.out.println("dataEntregaFormatada.after(dataDevolucao)) = " + dateEntrega.after(dateDevolucao));
+
+            if (dateEntrega.before(dateDevolucao)) {
+                dataEntregaFormatada.setTime(dateEntrega);
+                dataDevolucaoFormatada.setTime(dateDevolucao);
+
+                String status = request.getParameter("status");
+                String multaMotivo = request.getParameter("multaMotivo");
+                String multaValor = request.getParameter("multaValor");
+                String multaPaga = request.getParameter("multaPaga");
+
+                Emprestimo emprestimo = new Emprestimo();
+
+                if (!idEmprestimo.isEmpty()) {
+                    emprestimo.setIdEmprestimo(Integer.parseInt(idEmprestimo));
+                }
+
+                Cliente cliente = new Cliente();
+                cliente.setIdCliente(Integer.parseInt(idCliente));
+
+                Livro livro = new Livro();
+                livro.setIdLivro(Integer.parseInt(idLivro));
+
+                Usuario usuario = new Usuario();
+                usuario.setIdUsuario(Integer.parseInt(idUsuario));
+
+                emprestimo.setCliente(cliente);
+                emprestimo.setLivro(livro);
+                emprestimo.setUsuario(usuario);
+                emprestimo.setDataEntrega(dataEntregaFormatada);
+                emprestimo.setDataDevolucao(dataDevolucaoFormatada);
+                emprestimo.setStatus(Integer.parseInt(status));
+
+                if (!(multaMotivo.isEmpty() && multaPaga.isEmpty())) {
+                    emprestimo.setMultaMotivo(multaMotivo);
+                    if (!multaValor.isEmpty()) {
+                        emprestimo.setMultaValor(Double.parseDouble(multaValor));
+                    }
+                    emprestimo.setMultaPaga(Integer.parseInt(multaPaga));
+                }
+
+                try {
+                    EmprestimoDAO dao = new EmprestimoDAO();
+
+                    if (dao.gravar(emprestimo)) {
+                        if (status.equals("3")) {
+                            if (dao.finalizar(emprestimo, Integer.parseInt(idLivro), Integer.parseInt(idCliente))) {
+                                icon = "success";
+                                titulo = "Sucesso!";
+                                mensagem = "Gravado com sucesso!\nLivro Disponivel";
+                            }
+                        }
+                        icon = "success";
+                        titulo = "Sucesso!";
+                        mensagem = "Gravado com sucesso!";
+                    } else {
+                        icon = "error";
+                        titulo = "Erro";
+                        mensagem = "Erro ao gravar no banco de dados!";
+                        link = "/listar_cliente.jsp";
+                    }
+                } catch (Exception e) {
+                    out.print(e);
+                    icon = "error";
+                    titulo = "Erro";
+                    mensagem = "Erro ao executar";
+                    link = "/listar_cliente.jsp";
+                }
+
+            } else {
+                throw new InterruptedException();
+            }
+
         } catch (ParseException ex) {
             System.out.println("Exception: " + ex);
             icon = "error";
             titulo = "Erro";
-            mensagem = "Erro de convesção de data";
-        }
-
-        String status = request.getParameter("status");
-        String multaMotivo = request.getParameter("multaMotivo");
-        String multaValor = request.getParameter("multaValor");
-        String multaPaga = request.getParameter("multaPaga");
-
-        Emprestimo emprestimo = new Emprestimo();
-
-        if (!idEmprestimo.isEmpty()) {
-            emprestimo.setIdEmprestimo(Integer.parseInt(idEmprestimo));
-        }
-
-        Cliente cliente = new Cliente();
-        cliente.setIdCliente(Integer.parseInt(idCliente));
-
-        Livro livro = new Livro();
-        livro.setIdLivro(Integer.parseInt(idLivro));
-
-        Usuario usuario = new Usuario();
-        usuario.setIdUsuario(Integer.parseInt(idUsuario));
-
-        emprestimo.setCliente(cliente);
-        emprestimo.setLivro(livro);
-        emprestimo.setUsuario(usuario);
-        emprestimo.setDataEntrega(dataEntregaFormatada);
-        emprestimo.setDataDevolucao(dataDevolucaoFormatada);
-        emprestimo.setStatus(Integer.parseInt(status));
-
-        if (!(multaMotivo.isEmpty() && multaPaga.isEmpty())) {
-            emprestimo.setMultaMotivo(multaMotivo);
-            if (!multaValor.isEmpty()) {
-                emprestimo.setMultaValor(Double.parseDouble(multaValor));
-            }
-            emprestimo.setMultaPaga(Integer.parseInt(multaPaga));
-        }
-
-        try {
-            EmprestimoDAO dao = new EmprestimoDAO();
-
-            if (dao.gravar(emprestimo)) {
-                if (status.equals("3")) {
-                    if (dao.finalizar(emprestimo, Integer.parseInt(idLivro), Integer.parseInt(idCliente))) {
-                        icon = "success";
-                        titulo = "Sucesso!";
-                        mensagem = "Gravado com sucesso!\nLivro Disponivel";
-                    }
-                }
-                icon = "success";
-                titulo = "Sucesso!";
-                mensagem = "Gravado com sucesso!";
-            } else {
-                icon = "error";
-                titulo = "Erro";
-                mensagem = "Erro ao gravar no banco de dados!";
-            }
-        } catch (Exception e) {
-            out.print(e);
+            mensagem = "Data Invalida!";
+            link = "/listar_cliente.jsp";
+        } catch (InterruptedException ex) {
+            System.out.println("Exception: " + ex);
             icon = "error";
             titulo = "Erro";
-            mensagem = "Erro ao executar";
+            mensagem = "A Data de Entrega nao pode estar a frente da Data de Devolucao!";
+            link = "/listar_cliente.jsp";
         }
 
-        exibirMensagem(icon, titulo, mensagem, response, request);
+        exibirMensagem(icon, titulo, mensagem, link, response, request);
     }
 
-    private static void exibirMensagem(String icon, String title, String mensagem, HttpServletResponse response, HttpServletRequest request) {
+    private static void exibirMensagem(String icon, String title, String mensagem, String link, HttpServletResponse response, HttpServletRequest request) {
 
         try {
             response.setContentType("text/html;charset=UTF-8");
@@ -220,6 +241,10 @@ public class GerenciarEmprestimo extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("templates/base.jsp");
             dispatcher.include(request, response);
             String redirect = request.getContextPath() + "/listar_emprestimo.jsp";
+
+            if (!link.isEmpty()) {
+                redirect = request.getContextPath() + link;
+            }
 
             out.println("<script>showAlertBase('" + icon + "', '" + title + "', '" + mensagem + "', '" + redirect + "');</script>");
         } catch (Exception e) {
