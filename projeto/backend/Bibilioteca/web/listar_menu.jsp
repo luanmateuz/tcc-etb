@@ -49,7 +49,7 @@
                                 <a href="gerenciar_menu.do?acao=alterar&idMenu=${menu.idMenu}" class="btn btn-primary">
                                     <i class="bi-pencil" style="font-size: 16px; color: white;"></i>
                                 </a>
-                                <button class="btn btn-warning" onclick="swalWithBootstrap('${menu.nome}', 'gerenciar_menu.do?acao=deletar&idMenu=' + ${menu.idMenu})">
+                                <button class="btn btn-warning" onclick="swalWithBootstrap('Menu ${menu.nome}', 'gerenciar_menu.do?acao=deletar&idMenu=' + ${menu.idMenu})">
                                     <i class="bi-trash" style="font-size: 16px; color: white;"></i>
                                 </button>
                             </td>

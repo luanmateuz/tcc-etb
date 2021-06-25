@@ -24,7 +24,10 @@ public class GerenciarMenu extends HttpServlet {
         PrintWriter out = response.getWriter();
         String acao = request.getParameter("acao");
         String idMenu = request.getParameter("idMenu");
+        
         String mensagem = "";
+        String icon = "";
+        String titulo = "";
 
         try {
             Menu menu = new Menu();
@@ -39,10 +42,13 @@ public class GerenciarMenu extends HttpServlet {
                         request.setAttribute("menu", menu);
                         disp.forward(request, response);
                     } else {
-                        System.out.println("Menu nao encontrado");
+                        icon = "error";
+                        titulo = "Erro";
                         mensagem = "Menu não encontrado!";
                     }
                 } else {
+                    icon = "error";
+                    titulo = "Erro";
                     mensagem = "Acesso negado!";
                 }
             }
@@ -51,22 +57,28 @@ public class GerenciarMenu extends HttpServlet {
                 if (GerenciarLogin.verificarPermissao(request, response)) {
                     int id = Integer.parseInt(idMenu);
                     if (dao.deletar(id)) {
+                        icon = "success";
+                        titulo = "Sucesso!";
                         mensagem = "Menu deletado!";
                     } else {
+                        icon = "error";
+                        titulo = "Erro";
                         mensagem = "Erro ao deletar menu!";
                     }
                 } else {
+                    icon = "error";
+                    titulo = "Erro";
                     mensagem = "Acesso negado!";
                 }
             }
         } catch (Exception e) {
             out.println(e.getMessage());
+            icon = "error";
+            titulo = "Erro";
             mensagem = "Erro ao executar";
         }
-        out.println("<script type='text/javascript'>");
-        out.println("alert('" + mensagem + "')");
-        out.println("location.href='listar_menu.jsp'");
-        out.println("</script>");
+        
+        exibirMensagem(icon, titulo, mensagem, response, request);
     }
 
     @Override
@@ -78,9 +90,11 @@ public class GerenciarMenu extends HttpServlet {
         String idMenu = request.getParameter("idMenu");
         String nome = request.getParameter("nome");
         String link = request.getParameter("link");
-        String icone = request.getParameter("icone");
         String exibir = request.getParameter("exibir");
-        String mensagem;
+
+        String mensagem = "";
+        String icon = "";
+        String titulo = "";
 
         try {
             Menu menu = new Menu();
@@ -91,6 +105,8 @@ public class GerenciarMenu extends HttpServlet {
             }
 
             if (nome.equals("") || link.equals("") || exibir.equals("")) {
+                icon = "error";
+                titulo = "Erro";
                 mensagem = "Campos obrigatorios deveram ser preenchidos!";
             } else {
                 menu.setNome(nome);
@@ -98,20 +114,38 @@ public class GerenciarMenu extends HttpServlet {
                 menu.setExibir(Integer.parseInt(exibir));
 
                 if (dao.gravar(menu)) {
+                    icon = "success";
+                    titulo = "Sucesso!";
                     mensagem = "Gravado com sucesso!";
                 } else {
+                    icon = "error";
+                    titulo = "Erro";
                     mensagem = "Erro ao gravar no banco de dados!";
                 }
             }
         } catch (Exception e) {
             out.print(e.getMessage());
+            icon = "error";
+            titulo = "Erro";
             mensagem = "Erro ao executar";
         }
 
-        out.println("<script type='text/javascript'>");
-        out.println("alert('" + mensagem + "')");
-        out.println("location.href='listar_menu.jsp'");
-        out.println("</script>");
+        exibirMensagem(icon, titulo, mensagem, response, request);
+    }
+
+    private static void exibirMensagem(String icon, String title, String mensagem, HttpServletResponse response, HttpServletRequest request) {
+
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            RequestDispatcher dispatcher = request.getRequestDispatcher("templates/base.jsp");
+            dispatcher.include(request, response);
+            String redirect = request.getContextPath() + "/listar_menu.jsp";
+
+            out.println("<script>showAlertBase('" + icon + "', '" + title + "', '" + mensagem + "', '" + redirect + "');</script>");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
