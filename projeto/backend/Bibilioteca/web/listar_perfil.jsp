@@ -16,7 +16,7 @@
                 </div>
             </nav>
             
-            <h2 class="h2 mt-5 text-left font-weight-bold custom-md-container">👥 Lista de Perfils</h2>
+            <h2 class="h2 mt-5 text-left font-weight-bold custom-md-container">👥 Lista de Perfis</h2>
 
             <div class="row py-5">
                 <table class="table table-hover custom-md-container" id="listarPerfil">
