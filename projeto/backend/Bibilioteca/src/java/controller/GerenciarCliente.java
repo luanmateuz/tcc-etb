@@ -64,11 +64,11 @@ public class GerenciarCliente extends HttpServlet {
                     if (dao.deletar(cliente)) {
                         icon = "success";
                         titulo = "Sucesso!";
-                        mensagem = "O cliente foi deletado!";
+                        mensagem = "Desativado com sucesso!";
                     } else {
                         icon = "error";
                         titulo = "Erro";
-                        mensagem = "Erro ao deletar cliente do banco de dados";
+                        mensagem = "Erro ao desativar o Cliente!";
                     }
                 } else {
                     icon = "error";

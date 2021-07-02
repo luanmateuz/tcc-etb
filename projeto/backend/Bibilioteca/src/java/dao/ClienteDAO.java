@@ -98,7 +98,7 @@ public class ClienteDAO extends DatabaseDAO {
         
         try {
             this.conectar();
-            String sql = "DELETE FROM cliente WHERE idCliente=?";
+            String sql = "UPDATE cliente SET status=2 WHERE idCliente=?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, cliente.getIdCliente());
             stmt.execute();
