@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="assets/lib/datepicker/datepicker.css">
 <script src="assets/lib/datepicker/datepicker.js"></script>
 
-<input data-toggle="${id}" type="text" id="${id}" name="${id}" value="${value}" class="${classStyle}">
+<input data-toggle="${id}" type="text" id="${id}" name="${id}" value="${value}" class="${classStyle}" required>
 <script>
     $('[data-toggle="${id}"]').datepicker(
             {
