@@ -14,7 +14,7 @@
                     </li>
                   </ul>
                   <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="" aria-label="Search">
+                    <input class="form-control mr-sm-2" type="search" placeholder="" id="pesquisar" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
                         Pesquisar
                     </button>
@@ -25,7 +25,7 @@
             <h2 class="h2 mt-5 text-left font-weight-bold custom-md-container">💻 Lista de Usuarios</h2>
 
             <div class="row py-5">
-                <table class="table table-hover custom-md-container">
+                <table class="table table-hover custom-md-container" id="tabela">
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
@@ -67,6 +67,10 @@
                     </tbody>
                     </jsp:useBean>
                 </table>               
-           </div>
+            </div>
+            
+            <script src="assets/js/pesquisar.js">
+                
+            </script>
 
 <%@include file="templates/footer.jsp" %>
