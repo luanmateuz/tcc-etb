@@ -1,0 +1,80 @@
+0- APRESENTAÇÃO (LUAN)
+
+1- INTRODUÇÃO (ALYNNE)
+
+2- OBJETIVOS (ALYNNE)
+
+3- TECNOLOGIA UTILIZADA (LUAN)
+
+4- DIAGRMAA DE CASO DE USO GERAL (LUCIANO)
+
+5- DIAGRAMA DE CASO DE USO ESPECÍFICO (LUCIANO)
+
+6- TABELA DESCRITIVA DE CASO DE USO (JUAN)
+
+7- DIAGRAMA DE SEQUENCIA (ALYNNE)
+
+8- MODELO LOGICO (RYAN)
+
+9- DIAGRMA DE CLASSE (RYAN)
+
+10- CRONOGRAMA (LUCIANO)
+
+11- PROJETO EM EXECUÇÃO (LUAN)
+
+Roteiro Apresentacao Projeto
+
+- Tentar Acessar a pagina index.jsp sem estar logado 
+- Tentar logar com usuario e senha errados
+- Logar
+- Mostrar a Lista de Livros cadastrados
+- Cadastrar Livro
+- Cadastro um Livro
+    Titulo = Use a cabeça!: Java
+    Descricao = Use a Cabeça! Java é uma experiência completa de aprendizado em programação orientada a objetos (OO) e Java.
+                Projetado de acordo com princípios de aprendizado simples, este livro mostrará de aspectos básicos da linguagem a tópicos avançados que incluem segmentos, soquetes de rede e programação distribuída. O mais importante é que você aprenderá a pensar como um desenvolvedor orientado a objetos. E não irá apenas ler: você vai participar de jogos, resolver quebra-cabeças, refletir sobre mistérios e interagir com Java de formas nunca imaginadas. No decorrer da leitura, você escreverá muitos códigos Java reais.
+    Autor = Kathy Sierra
+    Editora = Alta Books
+    Categoria = Administracao **(Depois corrigi para Informatica)**
+    Numero Paginas = 496 
+    Ano = 2007
+    ISBN = 8576081733
+    DADOS DO LIVRO RETIRADOS DO SITE DA AMAZON 
+- Exibe o Livro Cadastrado 
+- Alterar a Imagem e a Categoria do Livro Cadastrado **(Depois corrigi para Informatica)**
+- Mostrar e explica rapidadamente sobre Perfis e Menus
+- Cadastra um Usuario
+    Nome = Rafael
+    Sobrenome = Fabiano
+    Data Nascimento = 02/07/2000
+    CPF = 12345678910
+    RG = 1234567
+    Perfil = (Funcionario)
+    Usuario = rafael
+    Senha = zxcvbnm
+    Email = prof.rafaelfabiano@gmail.com
+    Telefone = 999998888
+    CEP = 72130399 **(Correto 72130396)*
+- Mostra no banco de dados a Senha Criptografada!
+- Faz login com o Usuario cadastrado 
+- Exibe a Lista de Clientes Cadastradoso
+- Pesquisa Pelo Luiz
+- Altera o Email do Luiz
+- Exibe a alteracao do Email do Luiz
+- Registrar um Emprestimo do Livro Fahrenheit 451
+- Exibe a Lista de Emprestimos
+- Explica sobre o status e opçoes do emprestimo
+- Mostra o status do livro emprestado
+- Finaliza um emprestimo
+- Loga com outro usuario e Altera um emprestimo
+- Pega o Emprestimo multado e Altera o status para FINALIZADO e multa paga SIM
+- Depois mostra o status do Cliente e Livro que foram multados.
+- Pronto!
+
+
+12- ORÇAMENTO DO PROJETO (JUAN)
+
+13- CONCLUSÃO (ALYNNE)
+
+14- AGRADECIMENTOS (ALYNNE)
+
